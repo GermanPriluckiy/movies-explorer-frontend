@@ -1,0 +1,19 @@
+.about-me {
+    max-width: 1280px;
+    height: 654px;
+    background-color: white;
+    box-sizing: border-box;
+    padding-top: 110px;
+    margin: auto;
+}
+
+.about-me__title {
+    width: calc(100% - 140px);
+    margin: auto;
+    padding: 0;
+    height: 50px;
+    border-bottom: 1px solid black;
+    font-size: 22px;
+    color: #000;
+    line-height: normal;
+}

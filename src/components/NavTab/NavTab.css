@@ -1,0 +1,23 @@
+.navtab {
+    max-width: 1280px;
+    width: 100%;
+    margin: auto;
+    height: 66px;
+    display: flex;
+    background-color: #F5F5F5;
+
+}
+
+.navtab__menu {
+    margin: auto;
+    width: 276px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navtab__link {
+    color: black;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.23;
+}

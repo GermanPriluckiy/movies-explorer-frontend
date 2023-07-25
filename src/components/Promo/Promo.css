@@ -1,0 +1,28 @@
+.promo {
+    background-color: #465DFF;
+    max-width: 1280px;
+    min-height: 524px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 320px 1 fr;
+    grid-template-rows: 150px 1fr;
+}
+
+.promo__image {
+    margin: 82px auto 122px;
+    color: white;
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.promo__title {
+    color: white;
+    font-size: 50px;
+    line-height: 1.16;
+    letter-spacing: -2px;
+    width: 730px;
+    text-align: center;
+    padding: 0;
+    margin: 184px auto 224px;
+    grid-area: 1 / 1 / 2 / 2;
+        
+}
