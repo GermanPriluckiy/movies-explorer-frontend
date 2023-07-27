@@ -1,13 +1,16 @@
 .about {
   max-width: 1280px;
-  width: calc(100% - 140px);
-  margin: auto;
-  height: 608px;
+  margin: 0 auto;
+  padding-top: 110px;
+  min-height: 608px;
   background-color: white;
+  box-sizing: border-box;
+
 }
 
 .about__title {
-  margin: 110px auto 0 auto;
+  margin: 0 auto;
+  width: calc(100% - 140px);
   padding: 0;
   height: 50px;
   border-bottom: 1px solid black;
@@ -17,7 +20,8 @@
 }
 
 .about__description {
-  margin-top: 70px;
+  width: calc(100% - 140px);
+  margin: 70px auto 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 40px;
@@ -39,9 +43,10 @@
 }
 
 .about__duration {
-  margin: 110px 0;
+  width: calc(100% - 140px);
+  margin: 110px auto 0 auto;
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 228px 1fr;
   grid-template-rows: repeat(2, 36px);
   row-gap: 14px;
 }

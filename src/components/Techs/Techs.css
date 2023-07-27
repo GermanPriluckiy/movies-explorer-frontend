@@ -1,6 +1,6 @@
 .techs {
   max-width: 1280px;
-  height: 625px;
+  min-height: 625px;
   background-color: #F5F5F5;
   padding-top: 100px;
   box-sizing: border-box;
