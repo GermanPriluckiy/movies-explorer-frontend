@@ -1,9 +1,20 @@
-// function Footer() {
-//   return (
-//     <footer className="footer">
-//       <p className="footer__copyright">&#169; 2023 Mesto Russia</p>
-//     </footer>
-//   );
-// }
+import React from "react";
 
-// export default Footer;
+function Footer() {
+  return (
+    <footer className="footer">
+      <p className="footer__title">
+        Учебный проект Яндекс.Практикум х BeatFilm.
+      </p>
+      <div className="footer__info">
+        <p className="footer__copyright">&#169; 2023</p>
+        <nav className="footer__links">
+          <a className="footer__link" href="https://practicum.yandex.ru/">Яндекс.Практикум</a>
+          <a className="footer__link" href="https://github.com/GermanPriluckiy">Github</a>
+        </nav>
+      </div>
+    </footer>
+  );
+}
+
+export default Footer;
