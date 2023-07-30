@@ -1,24 +1,27 @@
-.register {
+.profile {
   display: flex;
   justify-content: center;
 }
 
-.register__container {
+.profile__container {
   margin: 70px auto;
-  width: calc(100% - 884px);
+  width: 410px;
+  display: flex;
+  flex-direction: column;
 }
 
-.register__title {
+.profile__title {
+  text-align: center;
   margin: 0;
   padding: 0;
-  margin-top: 40px;
+  margin-top: 4px;
   font-weight: 500;
   font-size: 24px;
 }
 
-.register__form {
+.profile__form {
   margin: 0;
-  margin-top: 40px;
+  margin-top: 123px;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -26,78 +29,75 @@
   grid-row: 2;
 }
 
-.register__label {
-  margin-bottom: 5px;
-  color: #a0a0a0;
-  font-size: 10px;
-  height: 12px;
+.profile__form-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.register__input {
+.profile__label {
+  color: #a0a0a0;
+  font-size: 10px;
+  height: 14px;
+  width: 50%;
+  text-align: start;
+  border-bottom: 2px solid #cccccc;
+}
+
+.profile__input {
   padding: 0;
-  padding-bottom: 10px;
-  margin-bottom: 6px;
+  margin: 0;
   border-style: none;
+  width: 50%;
   height: 14px;
   font-weight: 500;
   font-size: 14px;
   line-height: 1.2;
+  text-align: end;
   color: #000;
   border-bottom: 2px solid #cccccc;
 }
 
-.register__error {
+.profile__error {
   color: #ee3465;
   height: 12px;
   font-size: 10px;
+  width: 100%;
   padding: 0;
   margin: 0;
-  margin-bottom: 6px;
 }
 
-.register__error:last-of-type {
+.profile__error:last-of-type {
   margin-bottom: 0;
 }
 
-.register__button {
+.profile__button {
   border-style: none;
   padding: 0;
-  margin-top: 134px;
-  height: 50px;
+  margin-top: 228px;
+  height: 16px;
   border-radius: 3px;
-  background: #ff6838;
-  font-size: 14px;
-  line-height: 1.2;
-  color: #fff;
+  font-size: 13px;
+  background-color: white;
+  color: #000;
   transition: 0.6s;
 }
 
-.register__button:hover {
+.profile__button:hover {
   opacity: 0.85;
   cursor: pointer;
 }
 
-.register__subtitle {
-  font-size: 14px;
-  margin: 16px 0 0;
-  height: 17px;
-  padding: 0;
-  color: #a0a0a0;
-  text-align: center;
-}
-
-.register__subtitle-link {
-  margin: 0;
-  margin-left: 6px;
+.profile__subtitle-link {
+  margin: 16px auto 0;
   padding: 0;
   font-size: 14px;
   line-height: 17px;
-  margin-top: 6px;
   text-decoration: none;
-  color: #ff6838;
+  color: #EE3465;
+  text-align: center;
 }
 
-.register__subtitle-link:hover {
+.profile__subtitle-link:hover {
   opacity: 0.4;
   cursor: pointer;
   transition: opacity 0.6s ease-in-out;

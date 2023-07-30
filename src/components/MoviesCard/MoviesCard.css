@@ -1,0 +1,36 @@
+.movies-card {
+    display: flex;
+    justify-content: space-between;
+    background-color: #F9F9F9;
+}
+
+.movies-card__info {
+    margin: 22px 0 22px 22px;
+}
+
+.movies-card__name {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.movies-card__duration {
+    margin: 0;
+    padding: 0;
+    margin-top: 13px;
+    color: #A0A0A0;
+    font-size: 11px;
+}
+
+.movies-card__save {
+    width: 14px;
+    height: 12px;
+    margin-top: 30px;
+}
+
+.movies-card__image {
+    width: 220px;
+    height: 122px;
+    margin: 6px 6px 6px 0;
+}

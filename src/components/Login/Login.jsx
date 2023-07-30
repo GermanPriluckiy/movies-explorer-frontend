@@ -16,8 +16,8 @@ function Login() {
             placeholder="Email"
             className="login__input"
             required
-            minlength="2"
-            maxlength="40"
+            minLength="2"
+            maxLength="40"
           />
           <span className="login__error"></span>
           <span className="login__label">Пароль</span>
@@ -27,8 +27,8 @@ function Login() {
             placeholder="Пароль"
             className="login__input"
             required
-            minlength="2"
-            maxlength="200"
+            minLength="2"
+            maxLength="200"
           />
           <span className="login__error"></span>
           <button className="login__button" type="submit">

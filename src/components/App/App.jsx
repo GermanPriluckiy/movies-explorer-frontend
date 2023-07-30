@@ -4,7 +4,9 @@ import Main from "../Main/Main";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Wrapper from "../Wrapper/Wrapper";
-import SearchForm from "../SearchForm/SearchForm";
+import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
+import Profile from "../Profile/Profile";
 
 function App() {
   return (
@@ -19,17 +21,35 @@ function App() {
           }
         />
 
-<Route
+        <Route
           path="/movies"
           element={
             <Wrapper>
-              <SearchForm />
+              <Movies />
             </Wrapper>
           }
         />
 
+        <Route
+          path="/saved-movies"
+          element={
+            <Wrapper>
+              <SavedMovies />
+            </Wrapper>
+          }
+        />
+
+        <Route
+        path="/profile"
+        element={
+          <Wrapper>
+            <Profile />
+          </Wrapper>
+        }
+        />
+
         <Route path="/signin" element={<Login />} />
-        
+
         <Route path="/signup" element={<Register />} />
       </Routes>
     </body>
