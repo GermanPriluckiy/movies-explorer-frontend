@@ -27,7 +27,7 @@
     display: flex;
     justify-content: space-between;
     width: calc(100% - 140px);
-    margin: 41px auto 20px auto;
+    margin: 41px auto 20px;
 }
 
 .footer__links {
@@ -47,4 +47,10 @@
 .footer__link:hover {
     opacity: 0.7;
     transition: opacity 0.4s ease-in-out;
+}
+
+@media screen and (max-width: 804px) {
+    .footer__info {
+        width: calc(100% - 60px);
+    }
 }

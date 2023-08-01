@@ -46,7 +46,7 @@
   width: calc(100% - 140px);
   margin: 110px auto 0 auto;
   display: grid;
-  grid-template-columns: 228px 1fr;
+  grid-template-columns: 140px 1fr;
   grid-template-rows: repeat(2, 36px);
   row-gap: 14px;
 }
@@ -70,4 +70,31 @@
   text-align: center;
   font-size: 14px;
   color: #a0a0a0;
+}
+
+@media screen and (max-width: 804px) {
+  .about {
+    padding-top: 90px;
+    min-height: 585px;
+  }
+
+  .about__description {
+    width: calc(100% - 100px);
+    column-gap: 30px;
+    row-gap: 22px;
+  }
+
+  .about__description-text {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .about__duration {
+    width: calc(100% - 100px);
+    margin-top: 93px;
+  }
+
+  .about__title {
+    width: calc(100% - 100px);
+  }
 }

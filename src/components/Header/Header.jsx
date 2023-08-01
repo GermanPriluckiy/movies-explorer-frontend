@@ -6,6 +6,7 @@ import Navigation from "../Navigation/Navigation";
 function Header() {
   return (
     <header className="header" style={ { backgroundColor: window.location.pathname === "/" ? "#465DFF" : "#FFF" } }>
+      <div className="header__container">
       <a href="#about">
       <img className="header__logo" src={logo} alt="Лого Сайта" />
       </a>
@@ -21,6 +22,7 @@ function Header() {
       ) : (
         <Navigation />
       )}
+      </div>
     </header>
   );
 }

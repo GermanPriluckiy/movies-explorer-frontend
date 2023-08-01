@@ -26,3 +26,16 @@
     grid-area: 1 / 1 / 2 / 2;
         
 }
+
+@media screen and (max-width: 804px) {
+    .promo__title {
+        margin: 326px auto 342px;
+    }
+
+    .promo__image {
+        margin: 224px auto 240px;
+    }
+    .promo {
+        min-height: 784px;
+    }
+}

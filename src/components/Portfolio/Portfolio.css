@@ -1,6 +1,6 @@
 .portfolio {
     width: calc(100% - 140px);
-    margin: 100px auto 125px auto;
+    margin: 100px auto 125px;
 }
 
 .portfolio__title {
@@ -51,4 +51,20 @@
     height: 50px;
     background-position: center;
 
+}
+
+@media screen and (max-width: 804px) {
+    .portfolio {
+        width: calc(100% - 100px);
+        margin: 90px auto;
+    }
+
+    .portfolio__link {
+        font-size: 28px;
+        line-height: 1.8;
+    }
+
+    .portfolio__icon {
+        width: 25px;
+    }
 }

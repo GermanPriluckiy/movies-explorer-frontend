@@ -8,6 +8,7 @@
 }
 
 .navtab__menu {
+  padding: 0;
   margin: auto;
   width: 276px;
   display: flex;

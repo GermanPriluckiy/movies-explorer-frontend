@@ -1,14 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Navigation() {
-    return (
-        <nav className="navigation">
-            <Link className="navigation__link" to="/movies">Фильмы</Link>
-            <Link className="navigation__link" to="/saved-movies">Сохранённые фильмы</Link>
-            <Link className="navigation__link" to="/profile">Аккаунт</Link>
-        </nav>
-    );
+  return (
+    <nav className="navigation">
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? "navigation__link_active" : "navigation__link"
+        }
+        to="/movies"
+      >
+        Фильмы
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? "navigation__link_active" : "navigation__link"
+        }
+        to="/saved-movies"
+      >
+        Сохранённые фильмы
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? "navigation__link_active" : "navigation__link"
+        }
+        to="/profile"
+      >
+        Аккаунт
+      </NavLink>
+    </nav>
+  );
 }
 
 export default Navigation;
