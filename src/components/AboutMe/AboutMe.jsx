@@ -1,6 +1,5 @@
 import React from "react";
-import photo from '../../images/photo.jpg'
-import Portfolio from "../Portfolio/Portfolio";
+import photo from "../../images/photo.jpg";
 
 function AboutMe() {
   return (
@@ -9,7 +8,9 @@ function AboutMe() {
       <div className="about-me__info">
         <div className="about-me__description">
           <h2 className="about-me__description-name">Виталий</h2>
-          <p className="about-me__description-prof">Фронтенд-разработчик, 30 лет</p>
+          <p className="about-me__description-prof">
+            Фронтенд-разработчик, 30 лет
+          </p>
           <p className="about-me__description-text">
             Я родился и живу в Саратове, закончил факультет экономики СГУ. У
             меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь
@@ -17,11 +18,19 @@ function AboutMe() {
             Контур». После того, как прошёл курс по веб-разработке, начал
             заниматься фриланс-заказами и ушёл с постоянной работы.
           </p>
-          <a className="about-me__description-link" href="https://github.com/GermanPriluckiy">Github</a>
+          <a
+            className="about-me__description-link"
+            href="https://github.com/GermanPriluckiy"
+          >
+            Github
+          </a>
         </div>
-        <img className="about-me__description-photo" src={photo} alt="Моя фотография" />
+        <img
+          className="about-me__description-photo"
+          src={photo}
+          alt="Моя фотография"
+        />
       </div>
-      <Portfolio />
     </section>
   );
 }

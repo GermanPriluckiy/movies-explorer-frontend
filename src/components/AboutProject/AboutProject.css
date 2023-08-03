@@ -1,11 +1,9 @@
 .about {
-  max-width: 1280px;
-  margin: 0 auto;
+  width: 100%;
   padding-top: 110px;
   min-height: 608px;
   background-color: white;
   box-sizing: border-box;
-
 }
 
 .about__title {
@@ -17,15 +15,21 @@
   font-size: 22px;
   color: #000;
   line-height: normal;
+  font-weight: normal;
 }
 
 .about__description {
   width: calc(100% - 140px);
-  margin: 70px auto 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 40px;
-  row-gap: 26px;
+  margin: 70px auto 0;
+  display: flex;
+}
+
+.about__description-info {
+  width: 550px;
+}
+
+.about__description-info:last-of-type {
+  margin-left: 40px;
 }
 
 .about__description-subtitle {
@@ -38,6 +42,7 @@
 .about__description-text {
   padding: 0;
   margin: 0;
+  margin-top: 26px;
   font-size: 14px;
   line-height: 20px;
 }
@@ -46,7 +51,7 @@
   width: calc(100% - 140px);
   margin: 110px auto 0 auto;
   display: grid;
-  grid-template-columns: 140px 1fr;
+  grid-template-columns: 228px 1fr;
   grid-template-rows: repeat(2, 36px);
   row-gap: 14px;
 }
@@ -80,21 +85,77 @@
 
   .about__description {
     width: calc(100% - 100px);
-    column-gap: 30px;
-    row-gap: 22px;
   }
 
   .about__description-text {
     font-size: 12px;
     line-height: 1.5;
   }
-
+  .about__description-info:last-of-type {
+    margin-left: 30px;
+  }
   .about__duration {
     width: calc(100% - 100px);
     margin-top: 93px;
+    grid-template-columns: 140px 1fr;
   }
 
   .about__title {
     width: calc(100% - 100px);
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .about {
+    padding-top: 70px;
+    min-height: 640px;
+  }
+  .about__title {
+    width: calc(100% - 36px);
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    font-weight: normal;
+  }
+
+  .about__description {
+    width: calc(100% - 36px);
+    flex-direction: column;
+    margin-top: 60px;
+  }
+
+  .about__description-info {
+    width: 284px;
+  }
+
+  .about__description-subtitle {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .about__description-text {
+    font-size: 11px;
+    line-height: 1.45;
+    margin-top: 16px;
+  }
+
+  .about__description-info:last-of-type {
+    margin-top: 62px;
+    margin-left: 0;
+  }
+
+  .about__duration {
+    width: calc(100% - 36px);
+    margin-top: 60px;
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: repeat(2, 35px);
+    row-gap: 10px;
+  }
+
+  .about__duration-subtitle {
+    font-size: 11px;
+    padding-top: 11px;
+  }
+  .about__duration-text {
+    font-size: 11px;
   }
 }

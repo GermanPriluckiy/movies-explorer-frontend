@@ -1,56 +1,93 @@
 .footer {
-    max-width: 1280px;
-    margin: auto;
-    padding-top: 80px;
-    display: flex;
-    flex-direction: column;
-    
+  width: 100%;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
 }
 
 .footer__title {
-    color: #A0A0A0;
-    font-size: 13px;
-    font-feature-settings: 'clig' off, 'liga' off;
-    text-align: center;
-    padding: 0;
-    margin: 0 auto;
-    
+  color: #a0a0a0;
+  font-size: 13px;
+  font-feature-settings: "clig" off, "liga" off;
+  text-align: center;
+  padding: 0;
+  margin: 0 auto;
 }
 
 .footer__copyright {
-    margin: 0;
-    padding: 0;
-    font-size: 13px;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
 }
 
 .footer__info {
-    display: flex;
-    justify-content: space-between;
-    width: calc(100% - 140px);
-    margin: 41px auto 20px;
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 140px);
+  margin: 41px auto 20px;
 }
 
 .footer__links {
-    width: 182px;
-    display: flex;
-    justify-content: space-between;
+  width: 182px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .footer__link {
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    color: #000;
-    font-size: 13px;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  color: #000;
+  font-size: 13px;
+  text-align: center;
 }
 
 .footer__link:hover {
-    opacity: 0.7;
-    transition: opacity 0.4s ease-in-out;
+  opacity: 0.7;
+  transition: opacity 0.4s ease-in-out;
 }
 
 @media screen and (max-width: 804px) {
-    .footer__info {
-        width: calc(100% - 60px);
-    }
+  .footer__info {
+    width: calc(100% - 60px);
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .footer {
+    padding-top: 10px;
+  }
+  .footer__title {
+    width: calc(100% - 20px);
+    font-size: 12px;
+    line-height: normal;
+    font-weight: normal;
+    border: 1px solid #e8e8e8;
+    padding-bottom: 21px;
+  }
+
+  .footer__info {
+    flex-direction: column-reverse;
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  .footer__links {
+    flex-direction: column;
+  }
+
+  .footer__link {
+    font-size: 12px;
+    line-height: normal;
+    font-weight: normal;
+  }
+  .footer__link:last-of-type {
+    margin-top: 12px;
+  }
+
+  .footer__copyright {
+    margin-top: 30px;
+    font-size: 12px;
+  }
 }
