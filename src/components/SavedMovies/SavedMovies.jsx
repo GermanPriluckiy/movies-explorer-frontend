@@ -2,6 +2,7 @@ import React from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import deleteIcon from '../../images/delete-icon.svg'
+import { savedCards } from "../../utils/constants";
 
 function SavedMovies() {
     return (
@@ -9,6 +10,7 @@ function SavedMovies() {
         <SearchForm />
         <MoviesCardList
         icon={deleteIcon}
+        cards={savedCards}
         />
     </section>
     );

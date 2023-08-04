@@ -1,52 +1,63 @@
-const cards = [
+import card1 from "../images/card1.jpg";
+import card2 from "../images/card2.png";
+import card3 from "../images/card3.png";
+import card4 from "../images/card4.png";
+import card5 from "../images/card5.png";
+import card6 from "../images/card6.png";
+import card7 from "../images/card7.png";
+
+export const cards = [
   {
     nameRU: "33 слова о дизайне",
-    duration: 50,
-    image:
-      "https://point.bangbangeducation.ru/img/A0Uy5FscRbS8nLd30BUkp7AqBPnlCe5R4zHWmI6mtaM/fill/1200/630/ce/1/bG9jYWw6Ly9zdG9y/ZS9lZTQyNzcwMmNh/MjgyOWU1YmFmN2M4/M2Q5NTM5M2I2NjA1/NTRjMzUwMTU3NGI1/ZjNiYTAxNzg2Zjll/MGE.png",
+    duration: "1ч 42м",
+    image: card1,
   },
   {
-    nameRU: "33 слова о дизайне",
-    duration: 50,
-    image:
-      "https://point.bangbangeducation.ru/img/A0Uy5FscRbS8nLd30BUkp7AqBPnlCe5R4zHWmI6mtaM/fill/1200/630/ce/1/bG9jYWw6Ly9zdG9y/ZS9lZTQyNzcwMmNh/MjgyOWU1YmFmN2M4/M2Q5NTM5M2I2NjA1/NTRjMzUwMTU3NGI1/ZjNiYTAxNzg2Zjll/MGE.png",
+    nameRU: "Киноальманах «100 лет дизайна»",
+    duration: "1ч 42м",
+    image: card2,
   },
   {
-    nameRU: "33 слова о дизайне",
-    duration: 50,
-    image:
-      "https://point.bangbangeducation.ru/img/A0Uy5FscRbS8nLd30BUkp7AqBPnlCe5R4zHWmI6mtaM/fill/1200/630/ce/1/bG9jYWw6Ly9zdG9y/ZS9lZTQyNzcwMmNh/MjgyOWU1YmFmN2M4/M2Q5NTM5M2I2NjA1/NTRjMzUwMTU3NGI1/ZjNiYTAxNzg2Zjll/MGE.png",
+    nameRU: "В погоне за Бенкси",
+    duration: "1ч 42м",
+    image: card3,
   },
   {
-    nameRU: "33 слова о дизайне",
-    duration: 50,
-    image:
-      "https://point.bangbangeducation.ru/img/A0Uy5FscRbS8nLd30BUkp7AqBPnlCe5R4zHWmI6mtaM/fill/1200/630/ce/1/bG9jYWw6Ly9zdG9y/ZS9lZTQyNzcwMmNh/MjgyOWU1YmFmN2M4/M2Q5NTM5M2I2NjA1/NTRjMzUwMTU3NGI1/ZjNiYTAxNzg2Zjll/MGE.png",
+    nameRU: "Баския: Взрыв реальности",
+    duration: "1ч 42м",
+    image: card4,
   },
   {
-    nameRU: "33 слова о дизайне",
-    duration: 50,
-    image:
-      "https://point.bangbangeducation.ru/img/A0Uy5FscRbS8nLd30BUkp7AqBPnlCe5R4zHWmI6mtaM/fill/1200/630/ce/1/bG9jYWw6Ly9zdG9y/ZS9lZTQyNzcwMmNh/MjgyOWU1YmFmN2M4/M2Q5NTM5M2I2NjA1/NTRjMzUwMTU3NGI1/ZjNiYTAxNzg2Zjll/MGE.png",
+    nameRU: "Бег это свобода",
+    duration: "1ч 42м",
+    image: card5,
   },
   {
-    nameRU: "33 слова о дизайне",
-    duration: 50,
-    image:
-      "https://point.bangbangeducation.ru/img/A0Uy5FscRbS8nLd30BUkp7AqBPnlCe5R4zHWmI6mtaM/fill/1200/630/ce/1/bG9jYWw6Ly9zdG9y/ZS9lZTQyNzcwMmNh/MjgyOWU1YmFmN2M4/M2Q5NTM5M2I2NjA1/NTRjMzUwMTU3NGI1/ZjNiYTAxNzg2Zjll/MGE.png",
+    nameRU: "Книготорговцы",
+    duration: "1ч 42м",
+    image: card6,
   },
   {
-    nameRU: "33 слова о дизайне",
-    duration: 50,
-    image:
-      "https://point.bangbangeducation.ru/img/A0Uy5FscRbS8nLd30BUkp7AqBPnlCe5R4zHWmI6mtaM/fill/1200/630/ce/1/bG9jYWw6Ly9zdG9y/ZS9lZTQyNzcwMmNh/MjgyOWU1YmFmN2M4/M2Q5NTM5M2I2NjA1/NTRjMzUwMTU3NGI1/ZjNiYTAxNzg2Zjll/MGE.png",
-  },
-  {
-    nameRU: "33 слова о дизайне",
-    duration: 50,
-    image:
-      "https://point.bangbangeducation.ru/img/A0Uy5FscRbS8nLd30BUkp7AqBPnlCe5R4zHWmI6mtaM/fill/1200/630/ce/1/bG9jYWw6Ly9zdG9y/ZS9lZTQyNzcwMmNh/MjgyOWU1YmFmN2M4/M2Q5NTM5M2I2NjA1/NTRjMzUwMTU3NGI1/ZjNiYTAxNzg2Zjll/MGE.png",
+    nameRU: "Когда я думаю о Германии ночью",
+    duration: "1ч 42м",
+    image: card7,
   },
 ];
 
-export default cards;
+export const savedCards = [
+  {
+    nameRU: "33 слова о дизайне",
+    duration: "1ч 42м",
+    image: card1,
+  },
+  {
+    nameRU: "Киноальманах «100 лет дизайна»",
+    duration: "1ч 42м",
+    image: card2,
+  },
+  {
+    nameRU: "В погоне за Бенкси",
+    duration: "1ч 42м",
+    image: card3,
+  },
+];

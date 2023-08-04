@@ -1,15 +1,16 @@
 .header {
-  max-width: 1280px;
+  
   width: 100%;
   height: 74px;
   background-color: #465dff;
   display: flex;
   align-items: center;
+  
 }
 
 .header__container {
   width: calc(100% - 140px);
-  margin: auto;
+  margin: 18px auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

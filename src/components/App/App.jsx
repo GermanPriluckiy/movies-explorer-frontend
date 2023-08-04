@@ -7,6 +7,7 @@ import Wrapper from "../Wrapper/Wrapper";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 function App() {
   return (
@@ -40,17 +41,19 @@ function App() {
         />
 
         <Route
-        path="/profile"
-        element={
-          <Wrapper>
-            <Profile />
-          </Wrapper>
-        }
+          path="/profile"
+          element={
+            <Wrapper>
+              <Profile />
+            </Wrapper>
+          }
         />
 
         <Route path="/signin" element={<Login />} />
 
         <Route path="/signup" element={<Register />} />
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </body>
   );

@@ -1,6 +1,7 @@
 .movies-list {
     width: calc(100% - 140px);
-    margin: auto;
+    margin: 70px auto 80px;
     display: grid;
     row-gap: 40px;
 }
+

@@ -1,4 +1,23 @@
 .movies {
-    max-width: 1280px;
-    margin: auto;
+    width: 100%;
+    
+}
+
+.movies__more {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 42px;
+    border-style: none;
+    background-color: #F9F9F9;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    height: 36px;
+}
+
+.movies__more:hover {
+    opacity: 0.8;
+    cursor: pointer;
+    transition: opacity 0.5s ease-in-out;
 }

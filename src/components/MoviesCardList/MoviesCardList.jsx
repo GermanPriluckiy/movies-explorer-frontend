@@ -1,21 +1,22 @@
 import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import cards from "../../utils/constants";
 
 
-function MoviesCardList( { icon } ) {
+
+function MoviesCardList( { icon, cards } ) {
   return (
     <div className="movies-list">
-      {cards.map((card) => {
+      {cards.map((cards) => {
         return (
           <MoviesCard
-            image={card.image}
-            name={card.nameRU}
-            duration={card.duration}
+            image={cards.image}
+            name={cards.nameRU}
+            duration={cards.duration}
             icon={icon}
           />
         );
       })}
+      
     </div>
   );
 }
