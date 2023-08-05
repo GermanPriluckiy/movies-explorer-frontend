@@ -1,13 +1,15 @@
 .movies {
     width: 100%;
+    display: flex;
+    flex-direction: column;
     
 }
 
 .movies__more {
-    width: 100%;
+    width: calc(100% - 140px);
     padding: 0;
-    margin: 0;
-    margin-bottom: 42px;
+    margin: 42px auto 80px;
+    
     border-style: none;
     background-color: #F9F9F9;
     text-align: center;

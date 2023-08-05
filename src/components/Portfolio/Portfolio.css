@@ -78,7 +78,7 @@
 @media screen and (max-width: 525px) {
   .portfolio {
     margin: 70px auto 0;
-    min-height: 364px;
+    min-height: 294px;
   }
   .portfolio__title {
     width: calc(100% - 28px);
@@ -89,6 +89,7 @@
   .portfolio__links {
     margin-top: 40px;
     width: calc(100% - 28px);
+    min-height: 130px;
   }
   .portfolio__link {
     font-size: 18px;

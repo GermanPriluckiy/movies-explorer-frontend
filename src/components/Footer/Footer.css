@@ -1,9 +1,9 @@
 .footer {
   width: 100%;
-  padding-top: 80px;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: #FAFAFA;
+  
 }
 
 .footer__title {
@@ -12,7 +12,7 @@
   font-feature-settings: "clig" off, "liga" off;
   text-align: center;
   padding: 0;
-  margin: 0 auto;
+  margin: 80px auto 0;
 }
 
 .footer__copyright {
@@ -56,14 +56,15 @@
 
 @media screen and (max-width: 525px) {
   .footer {
-    padding-top: 10px;
+    background-color: white;
   }
+
   .footer__title {
     width: calc(100% - 20px);
     font-size: 12px;
     line-height: normal;
     font-weight: normal;
-    border: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
     padding-bottom: 21px;
   }
 

@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     background-color: #F9F9F9;
+    max-height: 134px;
 }
 
 .movies-card__info {
@@ -27,6 +28,7 @@
     width: 14px;
     height: 12px;
     margin-top: 30px;
+    
 }
 
 .movies-card__image {
