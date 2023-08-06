@@ -1,10 +1,16 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
-function Navigation() {
+function Navigation( { isBurgerMenuOpen } ) {
   return (
-    <nav className="navigation">
-      <div>
+    <nav className={isBurgerMenuOpen ? "navigation navigation_active" : "navigation"}>
+      <div className="navigation__links">
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? "navigation__link_active" : "navigation__link"
+        }
+        to="/"
+      >Главная</NavLink>
       <NavLink
         className={({ isActive }) =>
           isActive ? "navigation__link_active" : "navigation__link"

@@ -53,3 +53,26 @@
     -ms-transform: translateX(14px);
     transform: translateX(14px);
   }
+
+  @media screen and (max-width: 768px) {
+    .filter {
+      margin-top: 38px;
+    }
+    .filter__switch {
+      width: 34px;
+      height: 14px;
+    }
+    .filter__slider:before {
+      width: 10px;
+      height: 10px;
+      left: 6px;
+      bottom: 2px;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .filter__text {
+      font-size: 11px;
+    }
+    
+  }
