@@ -48,7 +48,7 @@
   margin: 0;
   border-style: none;
   width: 50%;
-  height: 11px;
+  height: 14px;
   font-weight: 500;
   font-size: 14px;
   line-height: 1.2;
@@ -105,4 +105,41 @@
   opacity: 0.4;
   cursor: pointer;
   transition: opacity 0.6s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__container {
+    margin-top: 236px;
+  }
+  .profile__input::placeholder {
+    font-size: 11px;
+  }
+
+  .profile__form {
+    margin-top: 95px;
+  }
+  .profile__error {
+    height: 30px;
+  }
+  .profile__button {
+    margin-top: 180px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .profile__container {
+    width: 260px;
+    margin-top: 70px;
+  }
+  .profile__form {
+    margin-top: 76px;
+  }
+  .profile__button {
+    margin-top: 350px;
+    font-size: 12px;
+  }
+  .profile__subtitle-link {
+    font-size: 12px;
+    font-weight: 500;
+  }
 }

@@ -7,13 +7,13 @@ function Navigation( { isBurgerMenuOpen } ) {
       <div className="navigation__links">
       <NavLink
         className={({ isActive }) =>
-          isActive ? "navigation__link_active" : "navigation__link"
+          isActive ? " navigation__link navigation__link_active" : "navigation__link"
         }
         to="/"
       >Главная</NavLink>
       <NavLink
         className={({ isActive }) =>
-          isActive ? "navigation__link_active" : "navigation__link"
+          isActive ? " navigation__link navigation__link_active" : "navigation__link"
         }
         to="/movies"
       >
@@ -21,7 +21,7 @@ function Navigation( { isBurgerMenuOpen } ) {
       </NavLink>
       <NavLink
         className={({ isActive }) =>
-          isActive ? "navigation__link_active" : "navigation__link"
+          isActive ? " navigation__link navigation__link_active" : "navigation__link"
         }
         to="/saved-movies"
       >

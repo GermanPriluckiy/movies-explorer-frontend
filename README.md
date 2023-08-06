@@ -14,3 +14,7 @@ https://github.com/GermanPriluckiy/movies-explorer-frontend
 ## Ссылка на бекенд 
 
 https://movies-explorer-pgk.nomoredomains.xyz
+
+## Ссылка на макет
+
+https://disk.yandex.ru/d/HbmRR3401gvMGA
