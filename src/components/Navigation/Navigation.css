@@ -70,12 +70,13 @@
 @media screen and (max-width: 768px) {
   .navigation {
     position: absolute;
+    position: fixed; 
     top: 0;
     right: 0;
     background-color: white;
     z-index: 50;
     width: 520px;
-    height: 1024px;
+    height: 100%; 
     display: none;
     flex-direction: column;
     justify-content: stretch;

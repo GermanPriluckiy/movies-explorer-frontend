@@ -9,6 +9,8 @@ function Portfolio() {
         <a
           className="portfolio__cover"
           href="https://github.com/GermanPriluckiy/how-to-learn"
+          rel="noreferrer"
+          target="_blank"
         >
           <p className="portfolio__link">Статичный сайт</p>
           <img
@@ -20,6 +22,8 @@ function Portfolio() {
         <a
           className="portfolio__cover"
           href="https://github.com/GermanPriluckiy/russian-travel"
+          rel="noreferrer"
+          target="_blank"
         >
           <p className="portfolio__link">Адаптивный сайт</p>
           <img
@@ -31,6 +35,8 @@ function Portfolio() {
         <a
           className="portfolio__cover"
           href="https://github.com/GermanPriluckiy/mesto"
+          rel="noreferrer"
+          target="_blank"
         >
           <p className="portfolio__link">Одностраничное приложение</p>
           <img

@@ -9,10 +9,9 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
-
 function App() {
   return (
-    <body className="page">
+    <div className="page">
       <Routes>
         <Route
           path="/"
@@ -56,7 +55,7 @@ function App() {
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </body>
+    </div>
   );
 }
 

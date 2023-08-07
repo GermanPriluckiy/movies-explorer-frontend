@@ -24,9 +24,9 @@ function Header() {
       }}
     >
       <div className="header__container">
-        <a href="#about">
+      <Link to="/">
           <img className="header__logo" src={logo} alt="Лого Сайта" />
-        </a>
+          </Link>
         {location.pathname === "/" ? (
           <div className="header__menu">
             <Link className="header__registation" to="/signup">
@@ -78,20 +78,20 @@ function Header() {
                     fill="none"
                   >
                     <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M36 14L8 14V11L36 11V14Z"
                       fill="black"
                     />
                     <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M36 24L8 24V21L36 21V24Z"
                       fill="black"
                     />
                     <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M36 34L8 34V31L36 31V34Z"
                       fill="black"
                     />
