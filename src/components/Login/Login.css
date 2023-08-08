@@ -9,6 +9,12 @@
   width: 396px;
 }
 
+.login__logo:hover {
+  opacity: 0.8;
+  cursor: pointer;
+  transition: opacity 0.5s ease-in-out;
+}
+
 .login__title {
   margin: 0;
   padding: 0;

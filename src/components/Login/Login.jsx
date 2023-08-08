@@ -6,7 +6,9 @@ function Login() {
   return (
     <section className="login">
       <div className="login__container">
-        <img className="login__logo" src={logo} alt="Логотип" />
+        <Link to="/">
+          <img className="login__logo" src={logo} alt="Логотип" />
+        </Link>
         <h2 className="login__title">Рады видеть!</h2>
         <form className="login__form" method="post">
           <span className="login__label">E-mail</span>

@@ -21,6 +21,8 @@ function AboutMe() {
           <a
             className="about-me__description-link"
             href="https://github.com/GermanPriluckiy"
+            target="_blank"
+            rel="noreferrer"
           >
             Github
           </a>
