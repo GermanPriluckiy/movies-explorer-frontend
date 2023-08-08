@@ -1,0 +1,157 @@
+.register {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.register__container {
+  margin: 70px auto;
+  width: 396px;
+}
+
+.register__logo:hover {
+  opacity: 0.8;
+  cursor: pointer;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.register__title {
+  margin: 0;
+  padding: 0;
+  margin-top: 40px;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.register__form {
+  margin: 0;
+  margin-top: 40px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  grid-row: 2;
+}
+
+.register__label {
+  margin-bottom: 5px;
+  color: #a0a0a0;
+  font-size: 10px;
+  height: 12px;
+}
+
+.register__input {
+  padding: 0;
+  padding-bottom: 10px;
+  margin-bottom: 6px;
+  border-style: none;
+  height: 14px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #000;
+  border-bottom: 2px solid #cccccc;
+}
+.register__input:focus {
+  outline-style: solid;
+  border-radius: 4px;
+  border: 1px solid rgba(174, 174, 174, 0.8);
+}
+
+.register__error {
+  color: #ee3465;
+  height: 12px;
+  font-size: 10px;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 6px;
+}
+
+.register__error:last-of-type {
+  margin-bottom: 0;
+}
+
+.register__button {
+  border-style: none;
+  padding: 0;
+  margin-top: 134px;
+  height: 50px;
+  border-radius: 3px;
+  background: #ff6838;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #fff;
+  transition: 0.6s;
+}
+
+.register__button:hover {
+  opacity: 0.85;
+  cursor: pointer;
+}
+
+.register__subtitle {
+  font-size: 14px;
+  margin: 16px 0 0;
+  height: 17px;
+  padding: 0;
+  color: #a0a0a0;
+  text-align: center;
+}
+
+.register__subtitle-link {
+  margin: 0;
+  margin-left: 6px;
+  padding: 0;
+  font-size: 14px;
+  line-height: 17px;
+  margin-top: 6px;
+  text-decoration: none;
+  color: #ff6838;
+}
+
+.register__subtitle-link:hover {
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.6s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+  .register__container {
+    margin: 232px auto;
+  }
+}
+
+@media screen and (max-width: 435px) {
+  .register__container {
+    width: 260px;
+    margin: 56px auto 30px;
+    display: flex;
+    flex-direction: column;
+  }
+  .register__title {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .register__subtitle {
+    font-size: 12px;
+    margin-top: 14px;
+  }
+
+  .register__subtitle-link {
+    font-size: 12px;
+  }
+  .register__form {
+    margin-top: 80px;
+  }
+  .register__logo {
+    margin: 0 auto;
+  }
+
+  .register__button {
+    font-size: 12px;
+    height: 45px;
+    margin-top: 228px;
+  }
+}

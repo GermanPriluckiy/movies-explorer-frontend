@@ -1,0 +1,26 @@
+.movies-list {
+  width: calc(100% - 140px);
+  max-height: 1194px;
+  margin: 70px auto 0;
+  display: grid;
+  row-gap: 40px;
+}
+
+@media screen and (max-width: 768px) {
+  .movies-list {
+    width: calc(100% - 60px);
+  }
+  
+}
+
+@media screen and (max-width: 400px) {
+  .movies-list {
+    width: calc(100% - 20px);
+    max-height: 1240px;
+    min-height: 544px;
+    overflow: hidden;
+    margin-top: 45px;
+    row-gap: 20px;
+  }
+  
+}
