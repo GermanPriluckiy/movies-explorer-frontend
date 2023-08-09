@@ -7,7 +7,11 @@ function Login() {
     <section className="login">
       <div className="login__container">
         <Link to="/">
-          <img className="login__logo" src={logo} alt="Логотип" />
+          <img
+            className="login__logo"
+            src={logo}
+            alt="Логотип Сайта"
+          />
         </Link>
         <h2 className="login__title">Рады видеть!</h2>
         <form className="login__form" method="post">
