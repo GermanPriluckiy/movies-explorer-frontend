@@ -52,6 +52,12 @@
   color: #000;
   border-bottom: 2px solid #cccccc;
 }
+
+.register__input_error {
+  color: red;
+  border-bottom: 2px solid red;
+}
+
 .register__input:focus {
   outline-style: solid;
   border-radius: 4px;
@@ -85,8 +91,13 @@
   transition: 0.6s;
 }
 
+.register__button:disabled {
+  background-color: #f8f8f8;
+  color: black;
+}
+
 .register__button:hover {
-  opacity: 0.85;
+  opacity: 0.8;
   cursor: pointer;
 }
 
