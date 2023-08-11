@@ -27,7 +27,7 @@ function Register() {
       .then((res) => {
         setIsSuccessRegistration(true);
         setRegistrationMessage(
-          "Подравляем! Вы успешно зарегистрировались!Через 5 секунд Вы попадёте на страницу авторизации."
+          "Подравляем! Вы успешно зарегистрировались! Через 5 секунд Вы попадёте на страницу авторизации."
         );
 
         function redirectToLogin() {

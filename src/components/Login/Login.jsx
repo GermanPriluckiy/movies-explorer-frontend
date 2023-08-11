@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import logo from "../../images/logo.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../utils/Auth";
 
 function Login() {
   const [formValues, setFormValues] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState({});
+
+  const navigate = useNavigate();
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -16,18 +19,25 @@ function Login() {
 
   const { userEmail, userPassword } = formValues;
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    login(userEmail, userPassword)
+      .then((data) => {
+        navigate("/movies");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <section className="login">
       <div className="login__container">
         <Link to="/">
-          <img
-            className="login__logo"
-            src={logo}
-            alt="Логотип Сайта"
-          />
+          <img className="login__logo" src={logo} alt="Логотип Сайта" />
         </Link>
         <h2 className="login__title">Рады видеть!</h2>
-        <form className="login__form" method="post">
+        <form className="login__form" method="post" onSubmit={handleSubmit}>
           <span className="login__label">E-mail</span>
           <input
             type="email"
@@ -64,7 +74,11 @@ function Login() {
             onChange={handleInputChange}
           />
           <span className="login__error">{errorMessage.userPassword}</span>
-          <button className="login__button" type="submit" disabled={!isFormValid}>
+          <button
+            className="login__button"
+            type="submit"
+            disabled={!isFormValid}
+          >
             Войти
           </button>
         </form>
