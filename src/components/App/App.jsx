@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import { ProtectedRoute } from "../ProtectedRoute";
 import Main from "../Main/Main";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
@@ -10,6 +11,8 @@ import Profile from "../Profile/Profile";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 function App() {
+  const [loggedIn, setLoggedIn] = React.useState(false);
+
   return (
     <div className="page">
       <Routes>
@@ -25,27 +28,42 @@ function App() {
         <Route
           path="/movies"
           element={
-            <Wrapper>
-              <Movies />
-            </Wrapper>
+            <ProtectedRoute
+              element={
+                <Wrapper>
+                  <Movies />
+                </Wrapper>
+              }
+              loggedIn={loggedIn}
+            />
           }
         />
 
         <Route
           path="/saved-movies"
           element={
-            <Wrapper>
-              <SavedMovies />
-            </Wrapper>
+            <ProtectedRoute
+              element={
+                <Wrapper>
+                  <SavedMovies />
+                </Wrapper>
+              }
+              loggedIn={loggedIn}
+            />
           }
         />
 
         <Route
           path="/profile"
           element={
-            <Wrapper>
-              <Profile />
-            </Wrapper>
+            <ProtectedRoute
+            element={
+              <Wrapper>
+                <Profile />
+              </Wrapper>
+            }
+            loggedIn={loggedIn}
+          />
           }
         />
 
