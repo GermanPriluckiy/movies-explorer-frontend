@@ -4,7 +4,7 @@ import React from "react";
 import Navigation from "../Navigation/Navigation";
 import { useState } from "react";
 
-function Header() {
+function Header({ loggedIn }) {
   const location = useLocation();
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 
@@ -24,10 +24,10 @@ function Header() {
       }}
     >
       <div className="header__container">
-      <Link to="/">
+        <Link to="/">
           <img className="header__logo" src={logo} alt="Лого Сайта" />
-          </Link>
-        {location.pathname === "/" ? (
+        </Link>
+        {!loggedIn ? (
           <div className="header__menu">
             <Link className="header__registation" to="/signup">
               Регистрация

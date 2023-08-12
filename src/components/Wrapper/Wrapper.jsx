@@ -2,11 +2,11 @@ import React from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-function Wrapper({ children }) {
+function Wrapper({ children, loggedIn }) {
   return (
     <>
-      <Header />
-      {children}
+      <Header loggedIn={loggedIn}/>
+      {children} 
       {window.location.pathname === "/profile" ? "" : <Footer />}
     </>
   );

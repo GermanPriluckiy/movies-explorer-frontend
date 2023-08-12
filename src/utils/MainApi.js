@@ -117,7 +117,7 @@ class mainApi {
   }
   
   export const api = new mainApi({
-    baseUrl: "localhost:3000",
+    baseUrl: "http://localhost:3000",
     headers: {
       "Content-Type": "application/json",
     },

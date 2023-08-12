@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../images/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../utils/Auth";
 
-function Login() {
+
+function Login( { loggedIn } ) {
   const [formValues, setFormValues] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState({});
+  
 
   const navigate = useNavigate();
 
@@ -29,6 +31,12 @@ function Login() {
         console.log(err);
       });
   }
+
+     useEffect(() => {
+     if (loggedIn) {
+      navigate("/movies");
+     }
+   }, [loggedIn, navigate]);
 
   return (
     <section className="login">

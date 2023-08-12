@@ -1,17 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Profile() {
+function Profile( { onLogout } ) {
+  const currentUser = React.useContext(CurrentUserContext);
+
   return (
     <section className="profile">
       <div className="profile__container">
-        <h2 className="profile__title">Привет, Виталий!</h2>
+        <h2 className="profile__title">Привет, {currentUser.name}!</h2>
         <form className="profile__form" method="post">
           <div className="profile__form-container">
             <span className="profile__label">Имя</span>
             <input
               lang="ru"
-              placeholder="Виталий"
+              placeholder={currentUser.name}
               className="profile__input"
               required
               minLength="2"
@@ -22,7 +25,7 @@ function Profile() {
             <input
               type="email"
               lang="ru"
-              placeholder="pochta@yandex.ru"
+              placeholder={currentUser.email}
               className="profile__input"
               required
               minLength="2"
@@ -35,7 +38,7 @@ function Profile() {
           </button>
         </form>
 
-        <Link className="profile__subtitle-link" to="/">
+        <Link className="profile__subtitle-link" to="/" onClick={onLogout}>
           Выйти из аккаунта
         </Link>
       </div>

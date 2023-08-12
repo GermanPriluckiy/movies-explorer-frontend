@@ -2,7 +2,7 @@ import React from "react";
 import { api } from "../../utils/MainApi";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ProtectedRoute } from "../ProtectedRoute";
-import { validateToken } from "../../utils/Auth";
+import { validateToken, exitAccount } from "../../utils/Auth";
 import Main from "../Main/Main";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
@@ -34,12 +34,21 @@ function App() {
         .getUserInfoFromServer()
         .then((userInfo) => {
           setCurrentUser(userInfo);
+          console.log(userInfo);
         })
         .catch((err) => console.log(err));
     } else {
       checkToken();
     }
   }, [loggedIn, navigate]);
+
+  //Выход из профиля
+  function handleLogout() {
+    exitAccount()
+    .then(() => setLoggedIn(false))
+    .catch(err => console.log(err));
+    
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -48,7 +57,7 @@ function App() {
           <Route
             path="/"
             element={
-              <Wrapper>
+              <Wrapper loggedIn={loggedIn}>
                 <Main />
               </Wrapper>
             }
@@ -58,12 +67,9 @@ function App() {
             path="/movies"
             element={
               <ProtectedRoute
-                element={
-                  <Wrapper>
-                    <Movies />
-                  </Wrapper>
-                }
+                element={Wrapper}
                 loggedIn={loggedIn}
+                children={<Movies />}
               />
             }
           />
@@ -71,7 +77,11 @@ function App() {
           <Route
             path="/saved-movies"
             element={
-              <ProtectedRoute element={<SavedMovies />} loggedIn={loggedIn} />
+              <ProtectedRoute
+                element={Wrapper}
+                loggedIn={loggedIn}
+                children={<SavedMovies />}
+              />
             }
           />
 
@@ -79,17 +89,14 @@ function App() {
             path="/profile"
             element={
               <ProtectedRoute
-                element={
-                  <Wrapper>
-                    <Profile />
-                  </Wrapper>
-                }
+                element={Wrapper}
                 loggedIn={loggedIn}
+                children={<Profile onLogout={handleLogout} />}
               />
             }
           />
 
-          <Route path="/signin" element={<Login />} />
+          <Route path="/signin" element={<Login loggedIn={loggedIn} />} />
 
           <Route path="/signup" element={<Register />} />
 
