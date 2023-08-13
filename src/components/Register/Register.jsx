@@ -5,6 +5,7 @@ import { register } from "../../utils/Auth";
 
 function Register() {
   const navigate = useNavigate();
+  
   const [formValues, setFormValues] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState({});

@@ -39,14 +39,14 @@ class mainApi {
     }
   
     //Редактирования информации профиля
-    setUserInfo(newName, newAbout) {
+    setUserInfo(newName, newEmail) {
       return fetch(`${this._baseUrl}/users/me`, {
         method: "PATCH",
         headers: this._headers,
         credentials: 'include',
         body: JSON.stringify({
           name: newName,
-          about: newAbout,
+          email: newEmail,
         }),
       }).then((res) => {
         return this._getResponseData(res);
@@ -90,20 +90,6 @@ class mainApi {
       }
     }
   
-  
-    //Обновление аватара
-    updateAvatar(link) {
-      return fetch(`${this._baseUrl}/users/me/avatar`, {
-        method: "PATCH",
-        headers: this._headers,
-        credentials: 'include',
-        body: JSON.stringify({
-          avatar: link,
-        }),
-      }).then((res) => {
-        return this._getResponseData(res);
-      });
-    }
   
     deleteCard(id) {
       return fetch(`${this._baseUrl}/cards/${id}`, {

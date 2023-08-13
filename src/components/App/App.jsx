@@ -34,7 +34,6 @@ function App() {
         .getUserInfoFromServer()
         .then((userInfo) => {
           setCurrentUser(userInfo);
-          console.log(userInfo);
         })
         .catch((err) => console.log(err));
     } else {
@@ -42,12 +41,18 @@ function App() {
     }
   }, [loggedIn, navigate]);
 
+  //Обновление профиля
+  function updateProfile(name, email) {
+    return api.setUserInfo(name, email).then((newInfo) => {
+      setCurrentUser(newInfo);
+    });
+  }
+
   //Выход из профиля
   function handleLogout() {
     exitAccount()
-    .then(() => setLoggedIn(false))
-    .catch(err => console.log(err));
-    
+      .then(() => setLoggedIn(false))
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -91,7 +96,9 @@ function App() {
               <ProtectedRoute
                 element={Wrapper}
                 loggedIn={loggedIn}
-                children={<Profile onLogout={handleLogout} />}
+                children={
+                  <Profile onLogout={handleLogout} onUpdate={updateProfile} />
+                }
               />
             }
           />
