@@ -3,12 +3,11 @@ import logo from "../../images/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../utils/Auth";
 
-
-function Login( { loggedIn } ) {
+function Login({ loggedIn }) {
   const [formValues, setFormValues] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState({});
-  
+  const [loginMessage, setLoginMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -28,15 +27,17 @@ function Login( { loggedIn } ) {
         navigate("/movies");
       })
       .catch((err) => {
-        console.log(err);
+        if (err.includes("401")) {
+          setLoginMessage("Неверная почта или пароль.");
+        }
       });
   }
 
-     useEffect(() => {
-     if (loggedIn) {
+  useEffect(() => {
+    if (loggedIn) {
       navigate("/movies");
-     }
-   }, [loggedIn, navigate]);
+    }
+  }, [loggedIn, navigate]);
 
   return (
     <section className="login">
@@ -82,6 +83,7 @@ function Login( { loggedIn } ) {
             onChange={handleInputChange}
           />
           <span className="login__error">{errorMessage.userPassword}</span>
+          <span className="login__result">{loginMessage}</span>
           <button
             className="login__button"
             type="submit"

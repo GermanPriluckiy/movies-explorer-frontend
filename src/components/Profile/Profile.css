@@ -70,6 +70,15 @@
   margin: 0;
 }
 
+.profile__result {
+  color: #ee3465;
+  height: 16px;
+  font-size: 10px;
+  padding: 0;
+  margin: 212px auto 6px;
+}
+
+
 .profile__error:last-of-type {
   margin-bottom: 0;
 }
@@ -77,7 +86,7 @@
 .profile__button {
   border-style: none;
   padding: 0;
-  margin-top: 228px;
+  margin-top: 2px;
   height: 16px;
   border-radius: 3px;
   font-size: 13px;

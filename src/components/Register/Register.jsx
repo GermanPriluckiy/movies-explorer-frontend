@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import logo from "../../images/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../utils/Auth";
+import { login } from "../../utils/Auth";
 
 function Register() {
   const navigate = useNavigate();
-  
+
   const [formValues, setFormValues] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState({});
   const [registrationMessage, setRegistrationMessage] = useState("");
-  const [isSuccessRegistration, setIsSuccessRegistration] = useState(false);
 
   function handleInputChange(e) {
     const { name, value } = e.target;
@@ -26,21 +26,17 @@ function Register() {
 
     register(userName, userEmail, userPassword)
       .then((res) => {
-        setIsSuccessRegistration(true);
-        setRegistrationMessage(
-          "Подравляем! Вы успешно зарегистрировались! Через 5 секунд Вы попадёте на страницу авторизации."
-        );
-
-        function redirectToLogin() {
-          navigate("/signin");
-        }
-        
-        setTimeout(redirectToLogin, 5000);
+        login(userEmail, userPassword)
+          .then((res) => {
+            navigate("/movies");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
-        setIsSuccessRegistration(false);
         if (err.includes("409")) {
-          setRegistrationMessage("Пользователь с такой почтой уже существует");
+          setRegistrationMessage("Пользователь с такой почтой уже существует.");
         }
       });
   }
@@ -111,9 +107,7 @@ function Register() {
             onChange={handleInputChange}
           />
           <span className="register__error">{errorMessage.userPassword}</span>
-          <span className="register__result" style={{color: isSuccessRegistration ? "green" : "red"}}>
-            {registrationMessage}
-          </span>
+          <span className="register__result">{registrationMessage}</span>
           <button
             className="register__button"
             type="submit"

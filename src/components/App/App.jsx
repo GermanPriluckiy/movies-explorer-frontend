@@ -15,6 +15,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
   const navigate = useNavigate();
+
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
 
@@ -40,13 +41,6 @@ function App() {
       checkToken();
     }
   }, [loggedIn, navigate]);
-
-  //Обновление профиля
-  function updateProfile(name, email) {
-    return api.setUserInfo(name, email).then((newInfo) => {
-      setCurrentUser(newInfo);
-    });
-  }
 
   //Выход из профиля
   function handleLogout() {
@@ -96,9 +90,7 @@ function App() {
               <ProtectedRoute
                 element={Wrapper}
                 loggedIn={loggedIn}
-                children={
-                  <Profile onLogout={handleLogout} onUpdate={updateProfile} />
-                }
+                children={<Profile onLogout={handleLogout} />}
               />
             }
           />

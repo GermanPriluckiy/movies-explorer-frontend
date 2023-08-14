@@ -2,9 +2,11 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useState } from "react";
+import { api } from "../../utils/MainApi";
 
 function Profile({ onLogout, onUpdate }) {
   const currentUser = React.useContext(CurrentUserContext);
+
   const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({});
@@ -38,9 +40,11 @@ function Profile({ onLogout, onUpdate }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onUpdate(name, email)
+
+    api
+      .setUserInfo(name, email)
       .then((res) => {
-        navigate("/movies");
+        console.log(res);
         setIsSuccessEditProfile(true);
         setEditMessage("Данные профиля успешно изменены.");
       })
@@ -52,17 +56,10 @@ function Profile({ onLogout, onUpdate }) {
       });
   }
 
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-
-  //   onUpdate(name, email);
-
-  // }
-
   return (
     <section className="profile">
       <div className="profile__container">
-        <h2 className="profile__title">Привет, {currentUser.name}!</h2>
+        <h2 className="profile__title">Привет, {name}!</h2>
         <form className="profile__form" method="post" onSubmit={handleSubmit}>
           <div className="profile__form-container">
             <span className="profile__label">Имя</span>
@@ -92,7 +89,12 @@ function Profile({ onLogout, onUpdate }) {
             />
             <span className="profile__error">{errorMessage.email}</span>
           </div>
-          <p>{editMessage}</p>
+          <p
+            className="profile__result"
+            style={{ color: isSuccessEditProfile ? "green" : "red" }}
+          >
+            {editMessage}
+          </p>
           <button
             className="profile__button"
             type="submit"

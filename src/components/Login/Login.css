@@ -74,6 +74,15 @@
   margin-bottom: 6px;
 }
 
+.login__result {
+  
+  color: #ee3465;
+  height: 16px;
+  font-size: 10px;
+  padding: 0;
+  margin: 188px auto 6px;
+}
+
 .login__error:last-of-type {
   margin-bottom: 0;
 }
@@ -81,7 +90,7 @@
 .login__button {
   border-style: none;
   padding: 0;
-  margin-top: 200px;
+  margin: 0;
   height: 50px;
   border-radius: 3px;
   background: #ff6838;
