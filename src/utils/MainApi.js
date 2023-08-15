@@ -53,20 +53,41 @@ class mainApi {
       });
     }
     
-    //Добавление новой карточки
-    addNewCard(cardName, cardLink) {
-      return fetch(`${this._baseUrl}/cards`, {
+    //Сохранение фильма
+    saveNewMovie(  country,
+      director,
+      duration,
+      year,
+      description,
+      image,
+      trailerLink,
+      thumbnail,
+      movieId,
+      nameRU,
+      nameEN,) {
+      return fetch(`${this._baseUrl}/movies`, {
         method: "POST",
         headers: this._headers,
         credentials: 'include',
         body: JSON.stringify({
-          name: cardName,
-          link: cardLink,
+          country: country,
+          director: director,
+          duration: duration,
+          year: year,
+          description: description,
+          image: image,
+          trailerLink: trailerLink,
+          thumbnail: thumbnail,
+          movieId: movieId,
+          nameRU: nameRU,
+          nameEN: nameEN,
         }),
       }).then((res) => {
         return this._getResponseData(res);
       });
     }
+
+
     //Функция лайка
   
     changeLikeCardStatus(id, isLiked) {

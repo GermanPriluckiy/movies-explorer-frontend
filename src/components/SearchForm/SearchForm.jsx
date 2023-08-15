@@ -2,18 +2,20 @@ import React, { useState, useEffect } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { apiMovies } from "../../utils/MoviesApi.js";
 
-function SearchForm() {
+function SearchForm({ movies, setMovies, setIsLoading, setIsNotFound }) {
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
     setKeyword(localStorage.getItem("keyword"));
+    localStorage.getItem("isLowDuration") === "true"
+      ? setIsLowDuration(true)
+      : setIsLowDuration(false);
   }, []);
 
   const [isLowDuration, setIsLowDuration] = useState(false);
 
   function handleInputChange(e) {
     setKeyword(e.target.value);
-    
   }
 
   function handleSubmit(e) {
@@ -22,27 +24,53 @@ function SearchForm() {
       alert("Введите ключевое слово");
       return;
     }
+
+    setIsLoading(true);
+    setIsNotFound(false);
+
     apiMovies
-      .getInitialCards()
+      .getMovies()
       .then((res) => {
-        const movies = res.find(
+        const movies = res.filter(
           (movie) =>
             movie.nameEN.toLowerCase().includes(keyword.toLowerCase()) ||
             movie.nameRU.toLowerCase().includes(keyword.toLowerCase())
         );
-        console.log(movies);
-        localStorage.setItem('movies', JSON.stringify(movies));
-        localStorage.setItem('keyword', keyword);
+
+        if (movies.length === 0) {
+          setIsNotFound(true);
+        }
+
+        if (isLowDuration) {
+          const result = movies.filter((item) => item.duration <= 40);
+          localStorage.setItem("movies", JSON.stringify(result));
+          localStorage.setItem("isLowDuration", isLowDuration);
+          setMovies(result);
+        } else {
+          localStorage.setItem("movies", JSON.stringify(movies));
+          localStorage.setItem("isLowDuration", isLowDuration);
+          setMovies(movies);
+        }
+
+        localStorage.setItem("keyword", keyword);
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
   function handleCheckbox() {
-    isLowDuration ? setIsLowDuration(false) : setIsLowDuration(true);
+    if (isLowDuration) {
+      setIsLowDuration(false);
+    } else {
+      setIsLowDuration(true);
+      const lowDurationMovies = movies.filter((item) => item.duration <= 40);
+      setMovies(lowDurationMovies);
+    }
   }
-
   return (
     <div className="search">
       <div className="search__container">
@@ -61,7 +89,11 @@ function SearchForm() {
             Найти
           </button>
         </form>
-        <FilterCheckbox onChange={handleCheckbox} />
+        <FilterCheckbox
+          onChange={handleCheckbox}
+          isLowDuration={isLowDuration}
+          setIsLowDuration={setIsLowDuration}
+        />
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 .movies-list {
   width: calc(100% - 140px);
+  height: 100%;
   max-height: 1194px;
   margin: 70px auto 0;
   display: grid;

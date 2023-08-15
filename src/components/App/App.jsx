@@ -24,7 +24,7 @@ function App() {
       validateToken()
         .then((user) => {
           setLoggedIn(true);
-
+          
           navigate("/movies", { replace: true });
         })
         .catch((err) => console.log(err));
@@ -35,6 +35,7 @@ function App() {
         .getUserInfoFromServer()
         .then((userInfo) => {
           setCurrentUser(userInfo);
+          
         })
         .catch((err) => console.log(err));
     } else {

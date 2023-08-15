@@ -13,8 +13,8 @@ class Api {
     }
   }
 
-  //Получение карточек с сервера
-  getInitialCards() {
+  //Получение фильмов по поиску
+  getMovies() {
     return fetch(`${this._baseUrl}/`, {
       method: "GET",
       headers: this._headers,
