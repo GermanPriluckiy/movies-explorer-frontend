@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { api } from "../../utils/MainApi";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ProtectedRoute } from "../ProtectedRoute";
@@ -16,15 +16,15 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 function App() {
   const navigate = useNavigate();
 
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  const [currentUser, setCurrentUser] = React.useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
 
-  React.useEffect(() => {
+  useEffect(() => {
     function checkToken() {
       validateToken()
         .then((user) => {
           setLoggedIn(true);
-          
+
           navigate("/movies", { replace: true });
         })
         .catch((err) => console.log(err));
@@ -35,7 +35,6 @@ function App() {
         .getUserInfoFromServer()
         .then((userInfo) => {
           setCurrentUser(userInfo);
-          
         })
         .catch((err) => console.log(err));
     } else {
@@ -46,7 +45,10 @@ function App() {
   //Выход из профиля
   function handleLogout() {
     exitAccount()
-      .then(() => setLoggedIn(false))
+      .then(() => {
+        setLoggedIn(false);
+        localStorage.clear();
+      })
       .catch((err) => console.log(err));
   }
 

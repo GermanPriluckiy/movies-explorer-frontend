@@ -1,7 +1,9 @@
 import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import { useLocation } from "react-router-dom";
 
 function MoviesCardList({ movies, isNotFound }) {
+  const location = useLocation();
   return (
     <div className="movies-list">
       {isNotFound ? (
@@ -15,9 +17,17 @@ function MoviesCardList({ movies, isNotFound }) {
               duration={movie.duration}
               year={movie.year}
               description={movie.description}
-              image={`https://api.nomoreparties.co${movie.image.url}`}
+              image={
+                location.pathname === "/movies"
+                  ? `https://api.nomoreparties.co${movie.image.url}`
+                  : movie.image
+              }
+              thumbnail={
+                location.pathname === "/movies"
+                  ? `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`
+                  : movie.thumbnail
+              }
               trailerLink={movie.trailerLink}
-              thumbnail={`https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`}
               movieId={movie.id}
               nameRU={movie.nameRU}
               nameEN={movie.nameEN}

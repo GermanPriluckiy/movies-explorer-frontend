@@ -4,7 +4,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useState } from "react";
 import { api } from "../../utils/MainApi";
 
-function Profile({ onLogout, onUpdate }) {
+function Profile({ onLogout }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const navigate = useNavigate();
