@@ -1,28 +1,17 @@
 import React, { useState, useEffect } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import deleteIcon from "../../images/delete-icon.svg";
-import { api } from "../../utils/MainApi";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function SavedMovies() {
-  const currentUser = React.useContext(CurrentUserContext);
-  const [savedMovies, setSavedMovies] = useState([]);
-  const [shownMovies, setShownMovies] = useState([]);
+function SavedMovies({ savedMovies }) {
   const [keyword, setKeyword] = useState("");
   const [isLowDuration, setIsLowDuration] = useState(false);
+  const [shownMovies, setShownMovies] = useState([]);
+  const [isNotFound, setIsNotFound] = useState(false);
 
   useEffect(() => {
-    api
-      .getSavedMovies(currentUser._id)
-      .then((res) => {
-        setSavedMovies(res.data);
-        setShownMovies(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [currentUser._id]);
+    setShownMovies(savedMovies);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleInputChange(e) {
     setKeyword(e.target.value);
@@ -48,12 +37,18 @@ function SavedMovies() {
       alert("Введите ключевое слово");
       return;
     }
+    setIsNotFound(false);
+
     const movies = savedMovies.filter(
       (movie) =>
         movie.nameEN.toLowerCase().includes(keyword.toLowerCase()) ||
         movie.nameRU.toLowerCase().includes(keyword.toLowerCase())
     );
-    setSavedMovies(movies);
+
+    if (movies.length === 0) {
+      setIsNotFound(true);
+    }
+
     if (isLowDuration) {
       const result = savedMovies.filter((item) => item.duration <= 40);
 
@@ -72,7 +67,11 @@ function SavedMovies() {
         onSubmit={handleSubmit}
         isLowDuration={isLowDuration}
       />
-      <MoviesCardList icon={deleteIcon} movies={shownMovies} />
+      <MoviesCardList
+        movies={shownMovies}
+        isNotFound={isNotFound}
+        savedMovies={savedMovies}
+      />
     </main>
   );
 }

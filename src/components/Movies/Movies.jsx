@@ -3,8 +3,9 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import { apiMovies } from "../../utils/MoviesApi.js";
+import { DEFAULT_NUMBER_OF_MOVIES } from "../../utils/constants";
 
-function Movies() {
+function Movies({ savedMovies, handleButtonClick }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
   const [keyword, setKeyword] = useState("");
@@ -19,18 +20,22 @@ function Movies() {
           .getMovies()
           .then((res) => {
             setAllMovies(res);
-            setMovies(res.slice(0, 7));
+            setMovies(res.slice(0, DEFAULT_NUMBER_OF_MOVIES));
           })
           .catch((err) => {
             console.log(err);
           })
       : localStorage.getItem("isLowDuration") === "true"
-      ? setMovies(JSON.parse(localStorage.getItem("movies")).filter((item) => item.duration <= 40))
+      ? setMovies(
+          JSON.parse(localStorage.getItem("movies")).filter(
+            (item) => item.duration <= 40
+          )
+        )
       : setMovies(JSON.parse(localStorage.getItem("movies")));
   }, []);
 
   function showMoreMovies() {
-    setMovies(allMovies.slice(0, 7 + countMovie));
+    setMovies(allMovies.slice(0, DEFAULT_NUMBER_OF_MOVIES + countMovie));
     setCountMovie(countMovie + 2);
   }
 
@@ -44,6 +49,7 @@ function Movies() {
 
   function handleInputChange(e) {
     setKeyword(e.target.value);
+    console.log(DEFAULT_NUMBER_OF_MOVIES);
   }
 
   function handleSubmit(e) {
@@ -95,7 +101,7 @@ function Movies() {
       setIsLowDuration(false);
       localStorage.getItem("movies")
         ? setMovies(JSON.parse(localStorage.getItem("movies")))
-        : setMovies(allMovies.slice(0, 7));
+        : setMovies(allMovies.slice(0, DEFAULT_NUMBER_OF_MOVIES));
     } else {
       setIsLowDuration(true);
       const lowDurationMovies = localStorage.getItem("movies")
@@ -118,8 +124,13 @@ function Movies() {
         <Preloader />
       ) : (
         <>
-          <MoviesCardList movies={movies} isNotFound={isNotFound} />
-          {movies.length >= 7 && countMovie <= movies.length ? (
+          <MoviesCardList
+            movies={movies}
+            isNotFound={isNotFound}
+            savedMovies={savedMovies}
+            handleButtonClick={handleButtonClick}
+          />
+          {movies.length >= DEFAULT_NUMBER_OF_MOVIES && countMovie <= movies.length ? (
             <button className="movies__more" onClick={showMoreMovies}>
               Ещё
             </button>

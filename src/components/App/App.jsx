@@ -18,6 +18,7 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [savedMovies, setSavedMovies] = useState([]);
 
   useEffect(() => {
     function checkToken() {
@@ -35,12 +36,60 @@ function App() {
         .getUserInfoFromServer()
         .then((userInfo) => {
           setCurrentUser(userInfo);
+          // setSavedMovies(savedMovies.data);
         })
         .catch((err) => console.log(err));
     } else {
       checkToken();
     }
-  }, [loggedIn, navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
+
+  useEffect(() => {
+    api
+      .getSavedMovies()
+      .then((res) => setSavedMovies(res.data))
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  function handleButtonClick(
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    thumbnail,
+    movieId,
+    nameRU,
+    nameEN
+  ) {
+    api
+      .saveNewMovie(
+        country,
+        director,
+        duration,
+        year,
+        description,
+        image,
+        trailerLink,
+        thumbnail,
+        movieId,
+        nameRU,
+        nameEN
+      )
+      .then((movie) => {
+        console.log("Фильм успешно сохранён");
+
+        setSavedMovies([...savedMovies, movie.data]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   //Выход из профиля
   function handleLogout() {
@@ -71,7 +120,12 @@ function App() {
               <ProtectedRoute
                 element={Wrapper}
                 loggedIn={loggedIn}
-                children={<Movies />}
+                children={
+                  <Movies
+                    savedMovies={savedMovies}
+                    handleButtonClick={handleButtonClick}
+                  />
+                }
               />
             }
           />
@@ -82,7 +136,7 @@ function App() {
               <ProtectedRoute
                 element={Wrapper}
                 loggedIn={loggedIn}
-                children={<SavedMovies />}
+                children={<SavedMovies savedMovies={savedMovies} />}
               />
             }
           />

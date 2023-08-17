@@ -1,5 +1,5 @@
 import React from "react";
-import { api } from "../../utils/MainApi";
+import { useLocation } from "react-router-dom";
 
 function MoviesCard({
   country,
@@ -10,11 +10,16 @@ function MoviesCard({
   image,
   trailerLink,
   thumbnail,
+  movie_id,
   movieId,
   nameRU,
   nameEN,
-  
+  savedMovies,
+  handleButtonClick,
 }) {
+  const location = useLocation();
+
+  const isMovieSaved = savedMovies.some((item) => item.movieId === movieId);
 
   function convToHours(duration) {
     const hours = Math.floor(duration / 60);
@@ -26,8 +31,9 @@ function MoviesCard({
     return `${hours}ч ${min}м`;
   }
 
-  function handleLikeClick() {
-    api.saveNewMovie( country,
+  function onButtonClick() {
+    handleButtonClick(
+      country,
       director,
       duration,
       year,
@@ -37,22 +43,35 @@ function MoviesCard({
       thumbnail,
       movieId,
       nameRU,
-      nameEN,).then((res) => {
-        console.log('Фильм успешно сохранён');
-      }).catch((err) => {
-        console.log(err);
-      })
-      
+      nameEN
+    );
+  }
+
+
+  function showId() {
+    console.log(movie_id);
   }
 
   return (
     <div className="movies-card">
       <div className="movies-card__info">
         <div>
-          <p className="movies-card__name">{nameRU}</p>
+          <p className="movies-card__name" onClick={showId}>
+            {nameRU}
+          </p>
           <p className="movies-card__duration">{convToHours(duration)}</p>
         </div>
-        <button className="movies-card__save" type="button" onClick={handleLikeClick}/>
+        <button
+          className={
+            location.pathname === "/movies"
+              ? isMovieSaved
+                ? "movies-card__save movies-card__save_active"
+                : "movies-card__save"
+              : "movies-card__delete"
+          }
+          type="button"
+          onClick={onButtonClick}
+        />
       </div>
       <a
         className="movies-card__link"
