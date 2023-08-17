@@ -24,6 +24,8 @@ function Movies() {
           .catch((err) => {
             console.log(err);
           })
+      : localStorage.getItem("isLowDuration") === "true"
+      ? setMovies(JSON.parse(localStorage.getItem("movies")).filter((item) => item.duration <= 40))
       : setMovies(JSON.parse(localStorage.getItem("movies")));
   }, []);
 
@@ -63,17 +65,17 @@ function Movies() {
             movie.nameRU.toLowerCase().includes(keyword.toLowerCase())
         );
 
+        localStorage.setItem("movies", JSON.stringify(movies));
+
         if (movies.length === 0) {
           setIsNotFound(true);
         }
 
         if (isLowDuration) {
           const result = movies.filter((item) => item.duration <= 40);
-          localStorage.setItem("movies", JSON.stringify(result));
           localStorage.setItem("isLowDuration", isLowDuration);
           setMovies(result);
         } else {
-          localStorage.setItem("movies", JSON.stringify(movies));
           localStorage.setItem("isLowDuration", isLowDuration);
           setMovies(movies);
         }
@@ -91,18 +93,17 @@ function Movies() {
   function handleCheckbox(e) {
     if (isLowDuration) {
       setIsLowDuration(false);
-      setMovies(JSON.parse(localStorage.getItem("movies")));
+      localStorage.getItem("movies")
+        ? setMovies(JSON.parse(localStorage.getItem("movies")))
+        : setMovies(allMovies.slice(0, 7));
     } else {
       setIsLowDuration(true);
-      const lowDurationMovies = movies.filter((item) => item.duration <= 40);
+      const lowDurationMovies = localStorage.getItem("movies")
+        ? movies.filter((item) => item.duration <= 40)
+        : allMovies.filter((item) => item.duration <= 40);
       setMovies(lowDurationMovies);
     }
   }
-
-  // useEffect(() => {
-  //   const mov = JSON.parse(localStorage.getItem("movies"));
-  //   setMovies(mov);
-  // }, [setMovies]);
 
   return (
     <main className="movies">
