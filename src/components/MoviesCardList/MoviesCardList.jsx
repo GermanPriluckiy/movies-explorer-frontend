@@ -7,13 +7,9 @@ function MoviesCardList({
   isNotFound,
   savedMovies,
   handleButtonClick,
-  setSavedMovies
+  setSavedMovies,
 }) {
   const location = useLocation();
-
-  // movies.map((movie) => {
-  //  return movie.id = savedMovies.find(savedMovie => savedMovie.id === movie.id);
-  // });
 
   return (
     <div className="movies-list">
@@ -39,9 +35,7 @@ function MoviesCardList({
                   : movie.thumbnail
               }
               trailerLink={movie.trailerLink}
-              movie_id={
-                location.pathname === "/saved-movies" ? movie._id : ""
-              }
+              movie_id={location.pathname === "/saved-movies" ? movie._id : ""}
               movieId={movie.id}
               nameRU={movie.nameRU}
               nameEN={movie.nameEN}

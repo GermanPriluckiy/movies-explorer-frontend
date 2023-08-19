@@ -10,50 +10,97 @@ function Movies({ savedMovies, handleButtonClick, setSavedMovies }) {
   const [isNotFound, setIsNotFound] = useState(false);
   const [keyword, setKeyword] = useState("");
   const [isLowDuration, setIsLowDuration] = useState(false);
-  const [allMovies, setAllMovies] = useState([]);
   const [movies, setMovies] = useState([]);
   const [countMovie, setCountMovie] = useState(2);
 
   useEffect(() => {
-    !localStorage.getItem("movies")
-      ? apiMovies
-          .getMovies()
-          .then((res) => {
-            setAllMovies(res);
-            setMovies(res.slice(0, DEFAULT_NUMBER_OF_MOVIES));
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-      : localStorage.getItem("isLowDuration") === "true"
-      ? setMovies(
-          JSON.parse(localStorage.getItem("movies")).filter(
-            (item) => item.duration <= 40
+    if (localStorage.getItem("allMovies") === null) {
+      apiMovies
+        .getMovies()
+        .then((res) => {
+          localStorage.setItem("allMovies", JSON.stringify(res));
+          setMovies(res.slice(0, DEFAULT_NUMBER_OF_MOVIES));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else if (localStorage.getItem("foundMovies") === null) {
+      localStorage.getItem("isLowDuration") === "true"
+        ? setMovies(
+            JSON.parse(localStorage.getItem("allMovies")).filter(
+              (item) => item.duration <= 40
+            )
           )
-        )
-      : setMovies(JSON.parse(localStorage.getItem("movies")));
+        : setMovies(
+            JSON.parse(localStorage.getItem("allMovies")).slice(
+              0,
+              DEFAULT_NUMBER_OF_MOVIES
+            )
+          );
+    } else {
+      localStorage.getItem("isLowDuration") === "true"
+        ? setMovies(
+            JSON.parse(localStorage.getItem("foundMovies")).filter(
+              (item) => item.duration <= 40
+            )
+          )
+        : setMovies(
+            JSON.parse(localStorage.getItem("foundMovies")).slice(
+              0,
+              DEFAULT_NUMBER_OF_MOVIES
+            )
+          );
+    }
   }, []);
 
   function showMoreMovies() {
-    setMovies(allMovies.slice(0, DEFAULT_NUMBER_OF_MOVIES + countMovie));
+    if (localStorage.getItem("foundMovies") === null) {
+      isLowDuration
+        ? setMovies(
+            JSON.parse(localStorage.getItem("allMovies"))
+              .filter((item) => item.duration <= 40)
+              .slice(0, DEFAULT_NUMBER_OF_MOVIES + countMovie)
+          )
+        : setMovies(
+            JSON.parse(localStorage.getItem("allMovies")).slice(
+              0,
+              DEFAULT_NUMBER_OF_MOVIES + countMovie
+            )
+          );
+    } else {
+      isLowDuration
+        ? setMovies(
+            JSON.parse(localStorage.getItem("foundMovies"))
+              .filter((item) => item.duration <= 40)
+              .slice(0, DEFAULT_NUMBER_OF_MOVIES + countMovie)
+          )
+        : setMovies(
+            JSON.parse(localStorage.getItem("foundMovies")).slice(
+              0,
+              DEFAULT_NUMBER_OF_MOVIES + countMovie
+            )
+          );
+    }
+
     setCountMovie(countMovie + 2);
   }
 
   useEffect(() => {
     setKeyword(localStorage.getItem("keyword"));
+    movies.length === 0 ? setIsNotFound(true) : setIsNotFound(false);
 
     localStorage.getItem("isLowDuration") === "true"
       ? setIsLowDuration(true)
       : setIsLowDuration(false);
-  }, []);
+  }, [movies]);
 
   function handleInputChange(e) {
     setKeyword(e.target.value);
-    console.log(DEFAULT_NUMBER_OF_MOVIES);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
+
     if (!keyword) {
       alert("Введите ключевое слово");
       return;
@@ -71,7 +118,7 @@ function Movies({ savedMovies, handleButtonClick, setSavedMovies }) {
             movie.nameRU.toLowerCase().includes(keyword.toLowerCase())
         );
 
-        localStorage.setItem("movies", JSON.stringify(movies));
+        localStorage.setItem("foundMovies", JSON.stringify(movies));
 
         if (movies.length === 0) {
           setIsNotFound(true);
@@ -79,13 +126,15 @@ function Movies({ savedMovies, handleButtonClick, setSavedMovies }) {
 
         if (isLowDuration) {
           const result = movies.filter((item) => item.duration <= 40);
-          localStorage.setItem("isLowDuration", isLowDuration);
+
+          if (result.length === 0) {
+            setIsNotFound(true);
+          }
+          console.log(JSON.parse(localStorage.getItem("foundMovies").length));
           setMovies(result);
         } else {
-          localStorage.setItem("isLowDuration", isLowDuration);
           setMovies(movies);
         }
-
         localStorage.setItem("keyword", keyword);
       })
       .catch((err) => {
@@ -96,20 +145,48 @@ function Movies({ savedMovies, handleButtonClick, setSavedMovies }) {
       });
   }
 
-  function handleCheckbox(e) {
+  function showFilteredMovies(moviesList) {
     if (isLowDuration) {
+      setIsNotFound(false);
       setIsLowDuration(false);
-      localStorage.getItem("movies")
-        ? setMovies(JSON.parse(localStorage.getItem("movies")))
-        : setMovies(allMovies.slice(0, DEFAULT_NUMBER_OF_MOVIES));
+      localStorage.setItem("isLowDuration", false);
+      setMovies(moviesList.slice(0, DEFAULT_NUMBER_OF_MOVIES));
     } else {
       setIsLowDuration(true);
-      const lowDurationMovies = localStorage.getItem("movies")
-        ? movies.filter((item) => item.duration <= 40)
-        : allMovies.filter((item) => item.duration <= 40);
-      setMovies(lowDurationMovies);
+      localStorage.setItem("isLowDuration", true);
+      const lowDurationMovies = moviesList.filter(
+        (item) => item.duration <= 40
+      );
+      if (lowDurationMovies.length === 0) {
+        setIsNotFound(true);
+      }
+      setMovies(lowDurationMovies.slice(0, DEFAULT_NUMBER_OF_MOVIES));
     }
   }
+
+  function handleCheckbox(e) {
+    setCountMovie(2);
+    localStorage.getItem("foundMovies") === null
+      ? showFilteredMovies(JSON.parse(localStorage.getItem("allMovies")))
+      : showFilteredMovies(JSON.parse(localStorage.getItem("foundMovies")));
+  }
+
+  // function handleCheckbox(e) {
+  //   if (isLowDuration) {
+  //     setIsLowDuration(false);
+  //     localStorage.setItem("isLowDuration", false);
+  //     localStorage.getItem("movies")
+  //       ? setMovies(JSON.parse(localStorage.getItem("movies")))
+  //       : setMovies(allMovies.slice(0, DEFAULT_NUMBER_OF_MOVIES));
+  //   } else {
+  //     setIsLowDuration(true);
+  //     localStorage.setItem("isLowDuration", true);
+  //     const lowDurationMovies = localStorage.getItem("movies")
+  //       ? movies.filter((item) => item.duration <= 40)
+  //       : allMovies.filter((item) => item.duration <= 40);
+  //     setMovies(lowDurationMovies);
+  //   }
+  // }
 
   return (
     <main className="movies">
@@ -131,7 +208,8 @@ function Movies({ savedMovies, handleButtonClick, setSavedMovies }) {
             handleButtonClick={handleButtonClick}
             setSavedMovies={setSavedMovies}
           />
-          {movies.length >= DEFAULT_NUMBER_OF_MOVIES && countMovie <= movies.length ? (
+          {movies.length >= DEFAULT_NUMBER_OF_MOVIES &&
+          countMovie + DEFAULT_NUMBER_OF_MOVIES - 3 < movies.length ? (
             <button className="movies__more" onClick={showMoreMovies}>
               Ещё
             </button>

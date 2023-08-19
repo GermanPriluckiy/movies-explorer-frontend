@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.movies-explorer-pgk.nomoredomains.xyz";
+export const BASE_URL = "http://localhost:3000";
 
 function getResponseData(res) {
   if (!res.ok) {

@@ -10,12 +10,11 @@ function SavedMovies({ savedMovies, setSavedMovies }) {
 
   useEffect(() => {
     setShownMovies(savedMovies);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savedMovies]);
 
   function handleInputChange(e) {
     setKeyword(e.target.value);
-    console.log(keyword);
+    
   }
 
   function handleCheckbox(e) {

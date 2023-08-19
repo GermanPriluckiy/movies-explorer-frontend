@@ -101,7 +101,7 @@ class mainApi {
 }
 
 export const api = new mainApi({
-  baseUrl: "https://api.movies-explorer-pgk.nomoredomains.xyz",
+  baseUrl: "http://localhost:3000",
   headers: {
     "Content-Type": "application/json",
   },

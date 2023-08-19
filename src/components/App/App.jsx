@@ -21,6 +21,10 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
 
   useEffect(() => {
+    console.log("Сработал эффект");
+  }, []);
+
+  useEffect(() => {
     function checkToken() {
       validateToken()
         .then((user) => {
@@ -91,10 +95,10 @@ function App() {
 
   //Выход из профиля
   function handleLogout() {
+    localStorage.clear();
     exitAccount()
       .then(() => {
         setLoggedIn(false);
-        localStorage.clear();
       })
       .catch((err) => console.log(err));
   }
@@ -135,7 +139,12 @@ function App() {
               <ProtectedRoute
                 element={Wrapper}
                 loggedIn={loggedIn}
-                children={<SavedMovies savedMovies={savedMovies} setSavedMovies={setSavedMovies}/>}
+                children={
+                  <SavedMovies
+                    savedMovies={savedMovies}
+                    setSavedMovies={setSavedMovies}
+                  />
+                }
               />
             }
           />
