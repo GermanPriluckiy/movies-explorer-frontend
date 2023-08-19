@@ -11,7 +11,7 @@
 
 https://github.com/GermanPriluckiy/movies-explorer-frontend
 
-## Ссылка на бекенд 
+## Ссылка на сайт
 
 https://movies-explorer-pgk.nomoredomains.xyz
 
