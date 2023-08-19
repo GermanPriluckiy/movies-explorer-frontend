@@ -2,22 +2,25 @@ import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { useLocation } from "react-router-dom";
 
-function MoviesCardList({ movies, isNotFound, savedMovies, handleButtonClick }) {
+function MoviesCardList({
+  movies,
+  isNotFound,
+  savedMovies,
+  handleButtonClick,
+  setSavedMovies
+}) {
   const location = useLocation();
 
   // movies.map((movie) => {
   //  return movie.id = savedMovies.find(savedMovie => savedMovie.id === movie.id);
   // });
 
-
   return (
-
     <div className="movies-list">
       {isNotFound ? (
         <p style={{ color: "red" }}>Поиск не дал результатов</p>
       ) : (
         movies.map((movie) => {
-          
           return (
             <MoviesCard
               country={movie.country}
@@ -36,17 +39,16 @@ function MoviesCardList({ movies, isNotFound, savedMovies, handleButtonClick }) 
                   : movie.thumbnail
               }
               trailerLink={movie.trailerLink}
-              // movie_id={
-              //   location.pathname === "/saved-movies"
-              //     ? movie._id
-              //     : movie.id
-              // }
+              movie_id={
+                location.pathname === "/saved-movies" ? movie._id : ""
+              }
               movieId={movie.id}
               nameRU={movie.nameRU}
               nameEN={movie.nameEN}
               key={movie.id}
               savedMovies={savedMovies}
               handleButtonClick={handleButtonClick}
+              setSavedMovies={setSavedMovies}
             />
           );
         })

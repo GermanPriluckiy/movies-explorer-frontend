@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { api } from "../../utils/MainApi";
 
 function MoviesCard({
   country,
@@ -16,10 +17,13 @@ function MoviesCard({
   nameEN,
   savedMovies,
   handleButtonClick,
+  setSavedMovies,
 }) {
   const location = useLocation();
 
   const isMovieSaved = savedMovies.some((item) => item.movieId === movieId);
+  const movieIdSeartch = savedMovies.find((item) => item.movieId === movieId);
+  const hexId = movieIdSeartch ? movieIdSeartch._id : "id нет";
 
   function convToHours(duration) {
     const hours = Math.floor(duration / 60);
@@ -47,18 +51,31 @@ function MoviesCard({
     );
   }
 
+  function onDeleteMovie() {
+    const deleteId = location.pathname === "/movies" ? hexId : movie_id;
+    api
+      .deleteMovie(deleteId)
+      .then((res) => {
+        console.log("Фильм успешно удален");
+        const deletedMovieIndex = savedMovies.findIndex(
+          (item) => item._id === deleteId
+        );
+        const newSavedMovie = savedMovies.filter(
+          (movie) => movie._id !== deleteId
+        );
 
-  function showId() {
-    console.log(movie_id);
+        setSavedMovies(newSavedMovie);
+
+        console.log(deletedMovieIndex);
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
     <div className="movies-card">
       <div className="movies-card__info">
         <div>
-          <p className="movies-card__name" onClick={showId}>
-            {nameRU}
-          </p>
+          <p className="movies-card__name">{nameRU}</p>
           <p className="movies-card__duration">{convToHours(duration)}</p>
         </div>
         <button
@@ -70,7 +87,13 @@ function MoviesCard({
               : "movies-card__delete"
           }
           type="button"
-          onClick={onButtonClick}
+          onClick={
+            location.pathname === "/movies"
+              ? isMovieSaved
+                ? onDeleteMovie
+                : onButtonClick
+              : onDeleteMovie
+          }
         />
       </div>
       <a

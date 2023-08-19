@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-function SavedMovies({ savedMovies }) {
+function SavedMovies({ savedMovies, setSavedMovies }) {
   const [keyword, setKeyword] = useState("");
   const [isLowDuration, setIsLowDuration] = useState(false);
   const [shownMovies, setShownMovies] = useState([]);
@@ -11,7 +11,7 @@ function SavedMovies({ savedMovies }) {
   useEffect(() => {
     setShownMovies(savedMovies);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [savedMovies]);
 
   function handleInputChange(e) {
     setKeyword(e.target.value);
@@ -71,6 +71,7 @@ function SavedMovies({ savedMovies }) {
         movies={shownMovies}
         isNotFound={isNotFound}
         savedMovies={savedMovies}
+        setSavedMovies={setSavedMovies}
       />
     </main>
   );

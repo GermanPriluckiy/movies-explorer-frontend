@@ -5,7 +5,7 @@ import Preloader from "../Preloader/Preloader";
 import { apiMovies } from "../../utils/MoviesApi.js";
 import { DEFAULT_NUMBER_OF_MOVIES } from "../../utils/constants";
 
-function Movies({ savedMovies, handleButtonClick }) {
+function Movies({ savedMovies, handleButtonClick, setSavedMovies }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
   const [keyword, setKeyword] = useState("");
@@ -129,6 +129,7 @@ function Movies({ savedMovies, handleButtonClick }) {
             isNotFound={isNotFound}
             savedMovies={savedMovies}
             handleButtonClick={handleButtonClick}
+            setSavedMovies={setSavedMovies}
           />
           {movies.length >= DEFAULT_NUMBER_OF_MOVIES && countMovie <= movies.length ? (
             <button className="movies__more" onClick={showMoreMovies}>

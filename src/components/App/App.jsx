@@ -36,14 +36,12 @@ function App() {
         .getUserInfoFromServer()
         .then((userInfo) => {
           setCurrentUser(userInfo);
-          // setSavedMovies(savedMovies.data);
         })
         .catch((err) => console.log(err));
     } else {
       checkToken();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn]);
+  }, [loggedIn, navigate]);
 
   useEffect(() => {
     api
@@ -124,6 +122,7 @@ function App() {
                   <Movies
                     savedMovies={savedMovies}
                     handleButtonClick={handleButtonClick}
+                    setSavedMovies={setSavedMovies}
                   />
                 }
               />
@@ -136,7 +135,7 @@ function App() {
               <ProtectedRoute
                 element={Wrapper}
                 loggedIn={loggedIn}
-                children={<SavedMovies savedMovies={savedMovies} />}
+                children={<SavedMovies savedMovies={savedMovies} setSavedMovies={setSavedMovies}/>}
               />
             }
           />
