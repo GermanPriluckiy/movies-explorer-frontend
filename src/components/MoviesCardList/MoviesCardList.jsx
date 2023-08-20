@@ -7,7 +7,7 @@ function MoviesCardList({
   isNotFound,
   savedMovies,
   handleButtonClick,
-  setSavedMovies,
+  onDeleteMovie,
 }) {
   const location = useLocation();
 
@@ -19,6 +19,7 @@ function MoviesCardList({
         movies.map((movie) => {
           return (
             <MoviesCard
+              key={location.pathname === "/movies" ? movie.id : movie.movieId}
               country={movie.country}
               director={movie.director}
               duration={movie.duration}
@@ -39,10 +40,9 @@ function MoviesCardList({
               movieId={movie.id}
               nameRU={movie.nameRU}
               nameEN={movie.nameEN}
-              key={movie.id}
               savedMovies={savedMovies}
               handleButtonClick={handleButtonClick}
-              setSavedMovies={setSavedMovies}
+              onDeleteMovie={onDeleteMovie}
             />
           );
         })

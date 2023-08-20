@@ -2,17 +2,33 @@ import React, { useState, useEffect } from "react";
 import logo from "../../images/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../utils/Auth";
+import { EMAIL_REGEXP } from "../../utils/constants";
 
 function Login({ loggedIn }) {
   const [formValues, setFormValues] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState({});
   const [loginMessage, setLoginMessage] = useState("");
+  const [emailValidationMessage, setEmailValidationMessage] = useState("");
+
+  function isEmailValid(value) {
+    return EMAIL_REGEXP.test(value);
+  }
 
   const navigate = useNavigate();
 
   function handleInputChange(e) {
     const { name, value } = e.target;
+
+    if (name === "userEmail") {
+      if (isEmailValid(value) === true) {
+        setEmailValidationMessage("");
+      } else {
+        setIsFormValid(false);
+        setEmailValidationMessage("Неверный адрес электронной почты");
+      }
+    }
+
     setFormValues({ ...formValues, [name]: value });
     setErrorMessage({ ...errorMessage, [name]: e.target.validationMessage });
     setIsFormValid(e.target.closest("form").checkValidity());
@@ -22,6 +38,9 @@ function Login({ loggedIn }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    setIsFormValid(false);
+
     login(userEmail, userPassword)
       .then((data) => {
         navigate("/movies");
@@ -54,7 +73,7 @@ function Login({ loggedIn }) {
             placeholder="Email"
             name="userEmail"
             className={
-              errorMessage.userEmail
+              errorMessage.userEmail || emailValidationMessage
                 ? "login__input login__input_error"
                 : "login__input"
             }
@@ -64,7 +83,9 @@ function Login({ loggedIn }) {
             value={userEmail || ""}
             onChange={handleInputChange}
           />
-          <span className="login__error">{errorMessage.userEmail}</span>
+          <span className="login__error">
+            {emailValidationMessage || errorMessage.userEmail}
+          </span>
           <span className="login__label">Пароль</span>
           <input
             type="password"

@@ -21,10 +21,6 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
 
   useEffect(() => {
-    console.log("Сработал эффект");
-  }, []);
-
-  useEffect(() => {
     function checkToken() {
       validateToken()
         .then((user) => {
@@ -48,14 +44,17 @@ function App() {
   }, [loggedIn, navigate]);
 
   useEffect(() => {
-    api
-      .getSavedMovies()
-      .then((res) => setSavedMovies(res.data))
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    if (loggedIn === true) {
+      api
+        .getSavedMovies()
+        .then((res) => setSavedMovies(res.data))
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [loggedIn]);
 
+  //Сохранение фильма
   function handleButtonClick(
     country,
     director,
@@ -93,9 +92,25 @@ function App() {
       });
   }
 
+  //Удаление фильма
+  function handleDeleteMovie(deleteId) {
+    api
+      .deleteMovie(deleteId)
+      .then((res) => {
+        console.log("Фильм успешно удален");
+
+        const newSavedMovie = savedMovies.filter(
+          (movie) => movie._id !== deleteId
+        );
+
+        setSavedMovies(newSavedMovie);
+      })
+      .catch((err) => console.log(err));
+  }
   //Выход из профиля
   function handleLogout() {
     localStorage.clear();
+    setSavedMovies([]);
     exitAccount()
       .then(() => {
         setLoggedIn(false);
@@ -126,7 +141,7 @@ function App() {
                   <Movies
                     savedMovies={savedMovies}
                     handleButtonClick={handleButtonClick}
-                    setSavedMovies={setSavedMovies}
+                    onDeleteMovie={handleDeleteMovie}
                   />
                 }
               />
@@ -142,7 +157,7 @@ function App() {
                 children={
                   <SavedMovies
                     savedMovies={savedMovies}
-                    setSavedMovies={setSavedMovies}
+                    onDeleteMovie={handleDeleteMovie}
                   />
                 }
               />
@@ -155,6 +170,7 @@ function App() {
               <ProtectedRoute
                 element={Wrapper}
                 loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
                 children={<Profile onLogout={handleLogout} />}
               />
             }

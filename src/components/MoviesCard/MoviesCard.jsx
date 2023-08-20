@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { api } from "../../utils/MainApi";
 
 function MoviesCard({
   country,
@@ -17,7 +16,7 @@ function MoviesCard({
   nameEN,
   savedMovies,
   handleButtonClick,
-  setSavedMovies,
+  onDeleteMovie,
 }) {
   const location = useLocation();
 
@@ -51,24 +50,9 @@ function MoviesCard({
     );
   }
 
-  function onDeleteMovie() {
+  function onDeleteClick() {
     const deleteId = location.pathname === "/movies" ? hexId : movie_id;
-    api
-      .deleteMovie(deleteId)
-      .then((res) => {
-        console.log("Фильм успешно удален");
-        const deletedMovieIndex = savedMovies.findIndex(
-          (item) => item._id === deleteId
-        );
-        const newSavedMovie = savedMovies.filter(
-          (movie) => movie._id !== deleteId
-        );
-
-        setSavedMovies(newSavedMovie);
-
-        console.log(deletedMovieIndex);
-      })
-      .catch((err) => console.log(err));
+    onDeleteMovie(deleteId);
   }
 
   return (
@@ -90,9 +74,9 @@ function MoviesCard({
           onClick={
             location.pathname === "/movies"
               ? isMovieSaved
-                ? onDeleteMovie
+                ? onDeleteClick
                 : onButtonClick
-              : onDeleteMovie
+              : onDeleteClick
           }
         />
       </div>

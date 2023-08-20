@@ -5,7 +5,7 @@ import Preloader from "../Preloader/Preloader";
 import { apiMovies } from "../../utils/MoviesApi.js";
 import { DEFAULT_NUMBER_OF_MOVIES } from "../../utils/constants";
 
-function Movies({ savedMovies, handleButtonClick, setSavedMovies }) {
+function Movies({ savedMovies, handleButtonClick, onDeleteMovie }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isNotFound, setIsNotFound] = useState(false);
   const [keyword, setKeyword] = useState("");
@@ -130,10 +130,10 @@ function Movies({ savedMovies, handleButtonClick, setSavedMovies }) {
           if (result.length === 0) {
             setIsNotFound(true);
           }
-          console.log(JSON.parse(localStorage.getItem("foundMovies").length));
+
           setMovies(result);
         } else {
-          setMovies(movies);
+          setMovies(movies.slice(0, DEFAULT_NUMBER_OF_MOVIES));
         }
         localStorage.setItem("keyword", keyword);
       })
@@ -171,23 +171,6 @@ function Movies({ savedMovies, handleButtonClick, setSavedMovies }) {
       : showFilteredMovies(JSON.parse(localStorage.getItem("foundMovies")));
   }
 
-  // function handleCheckbox(e) {
-  //   if (isLowDuration) {
-  //     setIsLowDuration(false);
-  //     localStorage.setItem("isLowDuration", false);
-  //     localStorage.getItem("movies")
-  //       ? setMovies(JSON.parse(localStorage.getItem("movies")))
-  //       : setMovies(allMovies.slice(0, DEFAULT_NUMBER_OF_MOVIES));
-  //   } else {
-  //     setIsLowDuration(true);
-  //     localStorage.setItem("isLowDuration", true);
-  //     const lowDurationMovies = localStorage.getItem("movies")
-  //       ? movies.filter((item) => item.duration <= 40)
-  //       : allMovies.filter((item) => item.duration <= 40);
-  //     setMovies(lowDurationMovies);
-  //   }
-  // }
-
   return (
     <main className="movies">
       <SearchForm
@@ -206,7 +189,7 @@ function Movies({ savedMovies, handleButtonClick, setSavedMovies }) {
             isNotFound={isNotFound}
             savedMovies={savedMovies}
             handleButtonClick={handleButtonClick}
-            setSavedMovies={setSavedMovies}
+            onDeleteMovie={onDeleteMovie}
           />
           {movies.length >= DEFAULT_NUMBER_OF_MOVIES &&
           countMovie + DEFAULT_NUMBER_OF_MOVIES - 3 < movies.length ? (

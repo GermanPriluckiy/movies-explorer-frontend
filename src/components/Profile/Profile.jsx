@@ -1,13 +1,12 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useState } from "react";
 import { api } from "../../utils/MainApi";
+import { EMAIL_REGEXP } from "../../utils/constants";
 
 function Profile({ onLogout }) {
   const currentUser = React.useContext(CurrentUserContext);
-
-  const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
@@ -15,10 +14,16 @@ function Profile({ onLogout }) {
   const [errorMessage, setErrorMessage] = useState({});
   const [editMessage, setEditMessage] = useState("");
   const [isSuccessEditProfile, setIsSuccessEditProfile] = useState(false);
+  const [emailValidationMessage, setEmailValidationMessage] = useState("");
+
+  function isEmailValid(value) {
+    return EMAIL_REGEXP.test(value);
+  }
 
   React.useEffect(() => {
     setFormValues(currentUser);
-  }, [currentUser, navigate]);
+    console.log("test");
+  }, [currentUser]);
 
   React.useEffect(() => {
     setIsNewInfo(
@@ -29,6 +34,15 @@ function Profile({ onLogout }) {
 
   function handleInputChange(e) {
     const { name, value } = e.target;
+
+    if (name === "email") {
+      if (isEmailValid(value) === true) {
+        setEmailValidationMessage("");
+      } else {
+        setIsFormValid(false);
+        setEmailValidationMessage("Неверный адрес электронной почты");
+      }
+    }
 
     setFormValues({ ...formValues, [name]: value });
     setErrorMessage({ ...errorMessage, [name]: e.target.validationMessage });
@@ -59,7 +73,7 @@ function Profile({ onLogout }) {
   return (
     <section className="profile">
       <div className="profile__container">
-        <h2 className="profile__title">Привет, {name}!</h2>
+        <h2 className="profile__title">Привет, {currentUser.name}!</h2>
         <form className="profile__form" method="post" onSubmit={handleSubmit}>
           <div className="profile__form-container">
             <span className="profile__label">Имя</span>
@@ -87,7 +101,9 @@ function Profile({ onLogout }) {
               value={email || ""}
               onChange={handleInputChange}
             />
-            <span className="profile__error">{errorMessage.email}</span>
+            <span className="profile__error">
+              {emailValidationMessage || errorMessage.email}
+            </span>
           </div>
           <p
             className="profile__result"

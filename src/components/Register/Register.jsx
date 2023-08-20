@@ -3,17 +3,32 @@ import logo from "../../images/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../utils/Auth";
 import { login } from "../../utils/Auth";
+import { EMAIL_REGEXP } from "../../utils/constants";
 
 function Register() {
   const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
+  const [emailValidationMessage, setEmailValidationMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState({});
   const [registrationMessage, setRegistrationMessage] = useState("");
 
+  function isEmailValid(value) {
+    return EMAIL_REGEXP.test(value);
+  }
+
   function handleInputChange(e) {
     const { name, value } = e.target;
+    if (name === "userEmail") {
+      if (isEmailValid(value) === true) {
+        setEmailValidationMessage("");
+      } else {
+        setIsFormValid(false);
+        setEmailValidationMessage("Неверный адрес электронной почты");
+      }
+    }
+
     setFormValues({ ...formValues, [name]: value });
     setErrorMessage({ ...errorMessage, [name]: e.target.validationMessage });
     setIsFormValid(e.target.closest("form").checkValidity());
@@ -23,7 +38,7 @@ function Register() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    setIsFormValid(false);
     register(userName, userEmail, userPassword)
       .then((res) => {
         login(userEmail, userPassword)
@@ -77,7 +92,7 @@ function Register() {
             lang="ru"
             placeholder="Email"
             className={
-              errorMessage.userEmail
+              errorMessage.userEmail || emailValidationMessage
                 ? "register__input register__input_error"
                 : "register__input"
             }
@@ -88,7 +103,9 @@ function Register() {
             value={userEmail || ""}
             onChange={handleInputChange}
           />
-          <span className="register__error">{errorMessage.userEmail}</span>
+          <span className="register__error">
+            {emailValidationMessage || errorMessage.userEmail}
+          </span>
           <span className="register__label">Пароль</span>
           <input
             type="password"
