@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:3000";
+import { BASE_URL } from "./constants";
 
 function getResponseData(res) {
   if (!res.ok) {
@@ -11,7 +11,7 @@ function getResponseData(res) {
 export const register = (name, email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
-    credentials: 'include',
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -22,7 +22,7 @@ export const register = (name, email, password) => {
 export const login = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
-    credentials: 'include',
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -33,21 +33,20 @@ export const login = (email, password) => {
 export const exitAccount = () => {
   return fetch(`${BASE_URL}/signout`, {
     method: "GET",
-    credentials: 'include',
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
-    
   }).then((res) => getResponseData(res));
 };
 
 export const validateToken = () => {
   return fetch(`${BASE_URL}/users/me`, {
-    credentials: 'include',
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      
     },
-  }).then((res) => getResponseData(res))
-  .then(data => data);
+  })
+    .then((res) => getResponseData(res))
+    .then((data) => data);
 };

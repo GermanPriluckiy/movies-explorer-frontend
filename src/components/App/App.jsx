@@ -19,8 +19,11 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
+  const [editMessage, setEditMessage] = useState("");
+  const [isSuccessEditProfile, setIsSuccessEditProfile] = useState(false);
 
   useEffect(() => {
+    setEditMessage("");
     function checkToken() {
       validateToken()
         .then((user) => {
@@ -107,6 +110,22 @@ function App() {
       })
       .catch((err) => console.log(err));
   }
+  //Обновление профиля
+  function handleUpdateProfile(name, email) {
+    api
+      .setUserInfo(name, email)
+      .then((res) => {
+        setCurrentUser(res.user);
+        setIsSuccessEditProfile(true);
+        setEditMessage("Данные профиля успешно изменены.");
+      })
+      .catch((err) => {
+        setIsSuccessEditProfile(false);
+        if (err.includes("409")) {
+          setEditMessage("Пользователь с такой почтой уже существует");
+        }
+      });
+  }
   //Выход из профиля
   function handleLogout() {
     localStorage.clear();
@@ -171,7 +190,14 @@ function App() {
                 element={Wrapper}
                 loggedIn={loggedIn}
                 setLoggedIn={setLoggedIn}
-                children={<Profile onLogout={handleLogout} />}
+                children={
+                  <Profile
+                    onLogout={handleLogout}
+                    editMessage={editMessage}
+                    isSuccessEditProfile={isSuccessEditProfile}
+                    handleUpdateProfile={handleUpdateProfile}
+                  />
+                }
               />
             }
           />

@@ -2,18 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useState } from "react";
-import { api } from "../../utils/MainApi";
 import { EMAIL_REGEXP } from "../../utils/constants";
 
-function Profile({ onLogout }) {
+function Profile({
+  onLogout,
+  isSuccessEditProfile,
+  editMessage,
+  handleUpdateProfile,
+}) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const [formValues, setFormValues] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const [isNewInfo, setIsNewInfo] = useState(false);
   const [errorMessage, setErrorMessage] = useState({});
-  const [editMessage, setEditMessage] = useState("");
-  const [isSuccessEditProfile, setIsSuccessEditProfile] = useState(false);
+
   const [emailValidationMessage, setEmailValidationMessage] = useState("");
 
   function isEmailValid(value) {
@@ -22,7 +25,6 @@ function Profile({ onLogout }) {
 
   React.useEffect(() => {
     setFormValues(currentUser);
-    console.log("test");
   }, [currentUser]);
 
   React.useEffect(() => {
@@ -54,20 +56,7 @@ function Profile({ onLogout }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    api
-      .setUserInfo(name, email)
-      .then((res) => {
-        console.log(res);
-        setIsSuccessEditProfile(true);
-        setEditMessage("Данные профиля успешно изменены.");
-      })
-      .catch((err) => {
-        setIsSuccessEditProfile(false);
-        if (err.includes("409")) {
-          setEditMessage("Пользователь с такой почтой уже существует");
-        }
-      });
+    handleUpdateProfile(name, email);
   }
 
   return (
