@@ -10,8 +10,9 @@ function Login({ loggedIn }) {
   const [errorMessage, setErrorMessage] = useState({});
   const [loginMessage, setLoginMessage] = useState("");
   const [emailValidationMessage, setEmailValidationMessage] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(false);
 
-  function isEmailValid(value) {
+  function handleEmailValidation(value) {
     return EMAIL_REGEXP.test(value);
   }
 
@@ -21,12 +22,12 @@ function Login({ loggedIn }) {
     const { name, value } = e.target;
 
     if (name === "userEmail") {
-      if (isEmailValid(value) === true) {
+      if (handleEmailValidation(value) === true) {
         setEmailValidationMessage("");
       } else {
-        setIsFormValid(false);
         setEmailValidationMessage("Неверный адрес электронной почты");
       }
+      setIsEmailValid(handleEmailValidation(value));
     }
 
     setFormValues({ ...formValues, [name]: value });
@@ -108,7 +109,7 @@ function Login({ loggedIn }) {
           <button
             className="login__button"
             type="submit"
-            disabled={!isFormValid}
+            disabled={!(isFormValid && isEmailValid)}
           >
             Войти
           </button>

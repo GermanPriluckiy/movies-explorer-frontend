@@ -81,8 +81,9 @@ function Movies({ savedMovies, handleButtonClick, onDeleteMovie }) {
             )
           );
     }
-
+    
     setCountMovie(countMovie + 2);
+    console.log(countMovie + DEFAULT_NUMBER_OF_MOVIES - 3, movies.length);
   }
 
   useEffect(() => {

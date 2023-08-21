@@ -13,20 +13,22 @@ function Register() {
   const [emailValidationMessage, setEmailValidationMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState({});
   const [registrationMessage, setRegistrationMessage] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(false);
 
-  function isEmailValid(value) {
+  function handleEmailValidation(value) {
     return EMAIL_REGEXP.test(value);
   }
 
   function handleInputChange(e) {
     const { name, value } = e.target;
+
     if (name === "userEmail") {
-      if (isEmailValid(value) === true) {
+      if (handleEmailValidation(value) === true) {
         setEmailValidationMessage("");
       } else {
-        setIsFormValid(false);
         setEmailValidationMessage("Неверный адрес электронной почты");
       }
+      setIsEmailValid(handleEmailValidation(value));
     }
 
     setFormValues({ ...formValues, [name]: value });
@@ -128,7 +130,7 @@ function Register() {
           <button
             className="register__button"
             type="submit"
-            disabled={!isFormValid}
+            disabled={!(isFormValid && isEmailValid)}
           >
             Зарегистрироваться
           </button>

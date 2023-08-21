@@ -16,10 +16,10 @@ function Profile({
   const [isFormValid, setIsFormValid] = useState(false);
   const [isNewInfo, setIsNewInfo] = useState(false);
   const [errorMessage, setErrorMessage] = useState({});
-
   const [emailValidationMessage, setEmailValidationMessage] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(false);
 
-  function isEmailValid(value) {
+  function handleEmailValidation(value) {
     return EMAIL_REGEXP.test(value);
   }
 
@@ -38,12 +38,12 @@ function Profile({
     const { name, value } = e.target;
 
     if (name === "email") {
-      if (isEmailValid(value) === true) {
+      if (handleEmailValidation(value) === true) {
         setEmailValidationMessage("");
       } else {
-        setIsFormValid(false);
         setEmailValidationMessage("Неверный адрес электронной почты");
       }
+      setIsEmailValid(handleEmailValidation(value));
     }
 
     setFormValues({ ...formValues, [name]: value });
@@ -68,7 +68,7 @@ function Profile({
             <span className="profile__label">Имя</span>
             <input
               lang="ru"
-              placeholder="Имя"
+              placeholder={currentUser.name}
               className="profile__input"
               name="name"
               required
@@ -103,7 +103,7 @@ function Profile({
           <button
             className="profile__button"
             type="submit"
-            disabled={!isEditProfile}
+            disabled={!(isEditProfile && isEmailValid)}
           >
             Редактировать
           </button>
