@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useState } from "react";
@@ -9,6 +9,7 @@ function Profile({
   isSuccessEditProfile,
   editMessage,
   handleUpdateProfile,
+  deleteEditMessage,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -22,12 +23,17 @@ function Profile({
   function handleEmailValidation(value) {
     return EMAIL_REGEXP.test(value);
   }
-
-  React.useEffect(() => {
+  useEffect(() => {
+    deleteEditMessage();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
+  
+  useEffect(() => {
     setFormValues(currentUser);
+    setIsEmailValid(true);
   }, [currentUser]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setIsNewInfo(
       currentUser.name !== formValues.name ||
         currentUser.email !== formValues.email
@@ -52,7 +58,6 @@ function Profile({
   }
 
   const { name, email } = formValues;
-  const isEditProfile = isFormValid && isNewInfo;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -103,7 +108,7 @@ function Profile({
           <button
             className="profile__button"
             type="submit"
-            disabled={!(isEditProfile && isEmailValid)}
+            disabled={!(isFormValid && isEmailValid && isNewInfo)}
           >
             Редактировать
           </button>

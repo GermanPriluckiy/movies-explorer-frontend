@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { api } from "../../utils/MainApi";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ProtectedRoute } from "../ProtectedRoute";
-import { validateToken, exitAccount } from "../../utils/Auth";
+import { validateToken, exitAccount, login } from "../../utils/Auth";
 import Main from "../Main/Main";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
@@ -21,6 +21,18 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [editMessage, setEditMessage] = useState("");
   const [isSuccessEditProfile, setIsSuccessEditProfile] = useState(false);
+  const [loginMessage, setLoginMessage] = useState("");
+
+  useEffect(() => {
+    navigate(JSON.parse(window.sessionStorage.getItem("lastRoute") || "{}"));
+    window.onbeforeunload = () => {
+      window.sessionStorage.setItem(
+        "lastRoute",
+        JSON.stringify(window.location.pathname)
+      );
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     setEditMessage("");
@@ -28,8 +40,6 @@ function App() {
       validateToken()
         .then((user) => {
           setLoggedIn(true);
-
-          navigate("/movies", { replace: true });
         })
         .catch((err) => console.log(err));
     }
@@ -44,7 +54,7 @@ function App() {
     } else {
       checkToken();
     }
-  }, [loggedIn, navigate]);
+  }, [loggedIn]);
 
   useEffect(() => {
     if (loggedIn === true) {
@@ -56,6 +66,26 @@ function App() {
         });
     }
   }, [loggedIn]);
+
+  function deleteEditMessage() {
+    setEditMessage('');
+  }
+
+
+  //Логин
+  function handleLogin(email, password) {
+    login(email, password)
+      .then((res) => {
+        setLoggedIn(true);
+        navigate("/movies");
+        console.log(res);
+      })
+      .catch((err) => {
+        if (err.includes("401")) {
+          setLoginMessage("Неверная почта или пароль.");
+        }
+      });
+  }
 
   //Сохранение фильма
   function handleButtonClick(
@@ -110,6 +140,7 @@ function App() {
       })
       .catch((err) => console.log(err));
   }
+
   //Обновление профиля
   function handleUpdateProfile(name, email) {
     api
@@ -126,6 +157,7 @@ function App() {
         }
       });
   }
+
   //Выход из профиля
   function handleLogout() {
     localStorage.clear();
@@ -196,13 +228,23 @@ function App() {
                     editMessage={editMessage}
                     isSuccessEditProfile={isSuccessEditProfile}
                     handleUpdateProfile={handleUpdateProfile}
+                    deleteEditMessage={deleteEditMessage}
                   />
                 }
               />
             }
           />
 
-          <Route path="/signin" element={<Login loggedIn={loggedIn} />} />
+          <Route
+            path="/signin"
+            element={
+              <Login
+                loggedIn={loggedIn}
+                onLogin={handleLogin}
+                loginMessage={loginMessage}
+              />
+            }
+          />
 
           <Route path="/signup" element={<Register />} />
 

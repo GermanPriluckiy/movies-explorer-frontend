@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../images/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../utils/Auth";
 import { EMAIL_REGEXP } from "../../utils/constants";
 
-function Login({ loggedIn }) {
+function Login({ loggedIn, onLogin, loginMessage }) {
   const [formValues, setFormValues] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState({});
-  const [loginMessage, setLoginMessage] = useState("");
+
   const [emailValidationMessage, setEmailValidationMessage] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(false);
 
@@ -41,16 +40,7 @@ function Login({ loggedIn }) {
     e.preventDefault();
 
     setIsFormValid(false);
-
-    login(userEmail, userPassword)
-      .then((data) => {
-        navigate("/movies");
-      })
-      .catch((err) => {
-        if (err.includes("401")) {
-          setLoginMessage("Неверная почта или пароль.");
-        }
-      });
+    onLogin(userEmail, userPassword);
   }
 
   useEffect(() => {
