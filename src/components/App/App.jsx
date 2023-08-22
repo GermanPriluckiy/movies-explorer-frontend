@@ -68,9 +68,8 @@ function App() {
   }, [loggedIn]);
 
   function deleteEditMessage() {
-    setEditMessage('');
+    setEditMessage("");
   }
-
 
   //Логин
   function handleLogin(email, password) {
