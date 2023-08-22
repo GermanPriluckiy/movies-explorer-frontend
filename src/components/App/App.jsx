@@ -77,7 +77,6 @@ function App() {
       .then((res) => {
         setLoggedIn(true);
         navigate("/movies");
-        console.log(res);
       })
       .catch((err) => {
         if (err.includes("401")) {
@@ -245,7 +244,10 @@ function App() {
             }
           />
 
-          <Route path="/signup" element={<Register />} />
+          <Route
+            path="/signup"
+            element={<Register handleLogin={handleLogin} />}
+          />
 
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

@@ -86,7 +86,6 @@ function Movies({ savedMovies, handleButtonClick, onDeleteMovie }) {
         );
 
     setCountMovie(countMovie + 2);
-    console.log(countMovie + DEFAULT_NUMBER_OF_MOVIES - 3, movies.length);
   }
 
   // function showMoreMovies() {
@@ -139,7 +138,7 @@ function Movies({ savedMovies, handleButtonClick, onDeleteMovie }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    
+
     if (!keyword) {
       alert("Введите ключевое слово");
       return;
@@ -218,11 +217,13 @@ function Movies({ savedMovies, handleButtonClick, onDeleteMovie }) {
             handleButtonClick={handleButtonClick}
             onDeleteMovie={onDeleteMovie}
           />
-          {movies.length < (isLowDuration ? (
-            JSON.parse(localStorage.getItem("foundMovies")).filter(
-              (item) => item.duration <= 40
-            ).length
-          ) : JSON.parse(localStorage.getItem("foundMovies")).length) ? (
+          {localStorage.getItem("allMovies") !== null &&
+          movies.length <
+            (isLowDuration
+              ? JSON.parse(localStorage.getItem("foundMovies")).filter(
+                  (item) => item.duration <= 40
+                ).length
+              : JSON.parse(localStorage.getItem("foundMovies")).length) ? (
             <button className="movies__more" onClick={showMoreMovies}>
               Ещё
             </button>

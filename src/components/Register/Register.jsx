@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import logo from "../../images/logo.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { register } from "../../utils/Auth";
-import { login } from "../../utils/Auth";
 import { EMAIL_REGEXP } from "../../utils/constants";
 
-function Register() {
-  const navigate = useNavigate();
-
+function Register({ handleLogin }) {
   const [formValues, setFormValues] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const [emailValidationMessage, setEmailValidationMessage] = useState("");
@@ -43,13 +40,8 @@ function Register() {
     setIsFormValid(false);
     register(userName, userEmail, userPassword)
       .then((res) => {
-        login(userEmail, userPassword)
-          .then((res) => {
-            navigate("/movies");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        console.log(res);
+        handleLogin(userEmail, userPassword);
       })
       .catch((err) => {
         if (err.includes("409")) {
