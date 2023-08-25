@@ -11,10 +11,14 @@
 
 https://github.com/GermanPriluckiy/movies-explorer-frontend
 
-## Ссылка на бекенд 
+## Ссылка на сайт
 
 https://movies-explorer-pgk.nomoredomains.xyz
 
 ## Ссылка на макет
 
 https://disk.yandex.ru/d/HbmRR3401gvMGA
+
+## Ссылка на пулл реквест
+
+https://github.com/GermanPriluckiy/movies-explorer-frontend/pull/2
